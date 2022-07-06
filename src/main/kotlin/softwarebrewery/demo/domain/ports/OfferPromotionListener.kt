@@ -1,22 +1,9 @@
 package softwarebrewery.demo.domain.ports
 
-import softwarebrewery.demo.domain.OfferId
-import softwarebrewery.demo.domain.PromotionId
-import java.time.Instant
+import softwarebrewery.demo.domain.model.OfferNoLongerPromoted
+import softwarebrewery.demo.domain.model.OfferPromoted
 
 interface OfferPromotionListener {
     fun handle(offerPromoted: OfferPromoted)
-    fun handle(offerDemoted: OfferDemoted)
+    fun handle(offerNoLongerPromoted: OfferNoLongerPromoted)
 }
-
-data class OfferPromoted(
-    val publishedAt: Instant,
-    val offerId: OfferId,
-    val promotionId: PromotionId,
-)
-
-data class OfferDemoted(
-    val publishedAt: Instant,
-    val offerId: OfferId,
-    val promotionId: PromotionId,
-)

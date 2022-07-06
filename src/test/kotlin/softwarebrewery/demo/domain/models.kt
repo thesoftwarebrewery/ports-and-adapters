@@ -1,5 +1,6 @@
 package softwarebrewery.demo.domain
 
+import softwarebrewery.demo.testing.namedRandom
 import java.time.Instant
 import java.time.Instant.now
 
@@ -8,20 +9,32 @@ fun aCountry(): Country =
 
 fun anOfferCreated(
     publishedAt: Instant = now(),
-    id: OfferId = randomString(),
+    offerId: OfferId = namedRandom("offer"),
+    productId: OfferId = namedRandom("product"),
     country: Country = aCountry(),
 ) = OfferCreated(
     publishedAt = publishedAt,
-    id = id,
+    offerId = offerId,
+    productId = productId,
     country = country,
 )
 
 fun aPromotionActivated(
     publishedAt: Instant = now(),
-    id: PromotionId = randomString(),
+    promotionId: PromotionId = namedRandom("promo"),
+    productId: OfferId = namedRandom("product"),
     country: Country = aCountry(),
 ) = PromotionActivated(
     publishedAt = publishedAt,
-    id = id,
+    promotionId = promotionId,
+    productId = productId,
     country = country,
+)
+
+fun aPromotionDeactivated(
+    publishedAt: Instant = now(),
+    promotionId: PromotionId = namedRandom("promo"),
+) = PromotionDeactivated(
+    publishedAt = publishedAt,
+    promotionId = promotionId,
 )

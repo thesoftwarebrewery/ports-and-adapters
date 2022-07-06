@@ -1,15 +1,9 @@
 package softwarebrewery.demo.domain.ports
 
-import softwarebrewery.demo.domain.Country
-import softwarebrewery.demo.domain.OfferId
-import java.time.Instant
+import softwarebrewery.demo.domain.ProductId
+import softwarebrewery.demo.domain.model.Offer
 
 interface OfferRepository {
-    fun saveOrUpdate(offer: Offer): Boolean
+    fun saveOrUpdate(offer: Offer): Modified<Offer>?
+    fun findByProductId(productId: ProductId) : Collection<Offer>
 }
-
-data class Offer(
-    val publishedAt: Instant,
-    val id: OfferId,
-    val country: Country,
-)

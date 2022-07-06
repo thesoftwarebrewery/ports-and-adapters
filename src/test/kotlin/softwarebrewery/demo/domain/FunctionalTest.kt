@@ -1,8 +1,8 @@
 package softwarebrewery.demo.domain
 
 import org.junit.jupiter.api.Test
-import softwarebrewery.demo.domain.ports.OfferPromoted
-import java.time.Instant.now
+import org.junit.jupiter.api.fail
+import softwarebrewery.demo.domain.model.OfferPromoted
 
 class FunctionalTest {
 
@@ -11,37 +11,39 @@ class FunctionalTest {
     @Test
     fun `given existing offer when matching promo is activated then notifies offer promoted`() {
         val offerCreated = anOfferCreated()
-        val promotionActivated = aPromotionActivated(country = offerCreated.country)
+        val promotionActivated = aPromotionActivated(
+            productId = offerCreated.productId,
+            country = offerCreated.country,
+        )
         domain.handle(offerCreated)
 
         domain.handle(promotionActivated)
 
-        domain.assertNotifiedOf(
-            OfferPromoted(
-                publishedAt = now(),
-                offerId = offerCreated.id,
-                promotionId = promotionActivated.id,
-            )
-        )
+        domain.assertNoOffersDemoted()
+        domain.assertOffersPromoted(OfferPromoted(
+            publishedAt = domain.clock(), // promoted when 'promotion activated' was handled
+            offerId = offerCreated.offerId,
+            promotionId = promotionActivated.promotionId,
+        ))
     }
 
     @Test
     fun `given existing offer when non-matching promo is activated then ignores`() {
-        throw NotImplementedError()
+        fail("not implemented")
     }
 
     @Test
     fun `given existing promo when matching offer is created then notifies offer promoted`() {
-        throw NotImplementedError()
+        fail("not implemented")
     }
 
     @Test
     fun `given existing promo when non-matching offer is created then ignores`() {
-        throw NotImplementedError()
+        fail("not implemented")
     }
 
     @Test
     fun `given offer promoted when promo is deleted then notifies offer demoted`() {
-        throw NotImplementedError()
+        fail("not implemented")
     }
 }
