@@ -40,8 +40,22 @@ class FunctionalTest {
     }
 
     @Test
-    @Disabled("not implemented")
     fun `given existing promo when matching offer is created then notifies offer promoted`() {
+        val promoActivated = aPromotionActivated()
+        val matchingOfferCreated = anOfferCreated(
+            productId = promoActivated.productId,
+            country = promoActivated.country,
+        )
+        domain.handle(promoActivated)
+
+        domain.handle(matchingOfferCreated)
+
+        domain.assertNoOffersDemoted()
+        domain.assertOffersPromoted(OfferPromoted(
+            publishedAt = domain.clock(), // promoted when 'promotion activated' was handled
+            offerId = matchingOfferCreated.offerId,
+            promotionId = promoActivated.promotionId,
+        ))
     }
 
     @Test
