@@ -59,8 +59,15 @@ class FunctionalTest {
     }
 
     @Test
-    @Disabled("not implemented")
     fun `given existing promo when non-matching offer is created then ignores`() {
+        val promoActivated = aPromotionActivated()
+        val nonMatchingOfferCreated = anOfferCreated()
+        domain.handle(promoActivated)
+
+        domain.handle(nonMatchingOfferCreated)
+
+        domain.assertNoOffersDemoted()
+        domain.assertNoOffersPromoted()
     }
 
     @Test
