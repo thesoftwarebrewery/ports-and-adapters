@@ -38,6 +38,8 @@ class DomainFixture {
         assertThat(offerPromotionListener.offersPromoted).containsExactly(*events)
     }
 
+    fun assertNoOffersPromoted() = assertThat(offerPromotionListener.offersPromoted).isEmpty()
+
     fun assertNoOffersDemoted() = assertThat(offerPromotionListener.offersDemoted).isEmpty()
 
 }
