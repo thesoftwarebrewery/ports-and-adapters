@@ -1,7 +1,6 @@
-package softwarebrewery.demo.domain
+package softwarebrewery.demo.domain.model
 
-import softwarebrewery.demo.domain.model.Offer
-import softwarebrewery.demo.domain.model.Promotion
+import softwarebrewery.demo.domain.api.*
 import softwarebrewery.demo.domain.ports.*
 
 class DomainHandler(
@@ -26,7 +25,7 @@ class DomainHandler(
                 productId = offerCreated.productId,
                 country = offerCreated.country,
             )
-        )?.let { offerPromotionLinker.linkPromosToOffer(it.value) }
+        )?.let { offerPromotionLinker.linkPromosToOffer(it.it) }
     }
 
     override fun handle(offerDeleted: OfferDeleted) {
@@ -41,7 +40,7 @@ class DomainHandler(
                 productId = promotionActivated.productId,
                 country = promotionActivated.country,
             )
-        )?.let { offerPromotionLinker.linkOffersToPromo(it.value) }
+        )?.let { offerPromotionLinker.linkOffersToPromo(it.it) }
     }
 
     override fun handle(promotionDeactivated: PromotionDeactivated) {

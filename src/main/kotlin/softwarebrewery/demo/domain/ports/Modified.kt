@@ -1,8 +1,8 @@
 package softwarebrewery.demo.domain.ports
 
-import java.time.Instant
+import java.time.*
 
 data class Modified<T>(
-    val value: T,
+    val it: T,
     val at: Instant,
 )

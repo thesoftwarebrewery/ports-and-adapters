@@ -1,9 +1,7 @@
 package softwarebrewery.demo.domain.ports
 
-import softwarebrewery.demo.domain.OfferId
-import softwarebrewery.demo.domain.ProductId
-import softwarebrewery.demo.domain.model.Offer
-import java.util.concurrent.ConcurrentHashMap
+import softwarebrewery.demo.domain.model.*
+import java.util.concurrent.*
 
 class InMemOfferRepository(
     private val clock: Clock,

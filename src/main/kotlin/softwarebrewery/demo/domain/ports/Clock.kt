@@ -1,5 +1,9 @@
 package softwarebrewery.demo.domain.ports
 
-import java.time.Instant
+import softwarebrewery.demo.domain.*
+import java.time.*
 
-typealias Clock = () -> Instant
+@SecondaryPort
+fun interface Clock {
+    operator fun invoke(): Instant
+}

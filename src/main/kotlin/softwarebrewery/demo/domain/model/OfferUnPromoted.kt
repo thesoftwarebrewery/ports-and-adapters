@@ -1,12 +1,11 @@
 package softwarebrewery.demo.domain.model
 
+import softwarebrewery.demo.domain.*
 import java.time.*
 
-typealias OfferId = String
-
-data class Offer(
+@DomainEvent
+data class OfferUnPromoted(
     val publishedAt: Instant,
     val offerId: OfferId,
-    val productId: ProductId,
-    val country: Country,
+    val promotionId: PromotionId,
 )

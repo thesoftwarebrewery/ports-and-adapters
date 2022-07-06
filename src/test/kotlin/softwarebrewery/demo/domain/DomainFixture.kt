@@ -1,11 +1,9 @@
 package softwarebrewery.demo.domain
 
-import org.assertj.core.api.Assertions.assertThat
-import softwarebrewery.demo.domain.model.OfferPromoted
-import softwarebrewery.demo.domain.ports.FakeClock
-import softwarebrewery.demo.domain.ports.InMemOfferPromoListener
-import softwarebrewery.demo.domain.ports.InMemOfferRepository
-import softwarebrewery.demo.domain.ports.InMemPromotionRepository
+import org.assertj.core.api.Assertions.*
+import softwarebrewery.demo.domain.model.*
+import softwarebrewery.demo.domain.ports.*
+import kotlin.time.Duration.Companion.seconds
 
 class DomainFixture {
 
@@ -22,7 +20,7 @@ class DomainFixture {
     )
 
     fun handle(vararg messages: Any) = messages.forEach {
-        clock.advance()
+        clock.advance(1.seconds)
         dispatch(it, domainHandler)
     }
 

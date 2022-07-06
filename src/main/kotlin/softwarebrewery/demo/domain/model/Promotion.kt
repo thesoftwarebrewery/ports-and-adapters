@@ -1,9 +1,8 @@
 package softwarebrewery.demo.domain.model
 
-import softwarebrewery.demo.domain.Country
-import softwarebrewery.demo.domain.ProductId
-import softwarebrewery.demo.domain.PromotionId
-import java.time.Instant
+import java.time.*
+
+typealias PromotionId = String
 
 data class Promotion(
     val publishedAt: Instant,
@@ -12,7 +11,6 @@ data class Promotion(
     val country: Country,
 )
 
-fun Promotion.appliesTo(offer: Offer): Boolean {
-    return this.productId == offer.productId
-            && this.country == offer.country
-}
+fun Promotion.appliesTo(offer: Offer) =
+    productId == offer.productId
+            && country == offer.country

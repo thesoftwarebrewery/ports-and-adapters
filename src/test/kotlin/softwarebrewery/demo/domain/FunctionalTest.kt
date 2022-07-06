@@ -1,8 +1,7 @@
 package softwarebrewery.demo.domain
 
-import org.junit.jupiter.api.Disabled
-import org.junit.jupiter.api.Test
-import softwarebrewery.demo.domain.model.OfferPromoted
+import org.junit.jupiter.api.*
+import softwarebrewery.demo.domain.model.*
 
 class FunctionalTest {
 
@@ -20,11 +19,13 @@ class FunctionalTest {
         domain.handle(matchingPromoActivated)
 
         domain.assertNoOffersDemoted()
-        domain.assertOffersPromoted(OfferPromoted(
-            publishedAt = domain.clock(), // promoted when 'promotion activated' was handled
-            offerId = offerCreated.offerId,
-            promotionId = matchingPromoActivated.promotionId,
-        ))
+        domain.assertOffersPromoted(
+            OfferPromoted(
+                publishedAt = domain.clock(), // promoted when 'promotion activated' was handled
+                offerId = offerCreated.offerId,
+                promotionId = matchingPromoActivated.promotionId,
+            )
+        )
     }
 
     @Test
@@ -51,11 +52,13 @@ class FunctionalTest {
         domain.handle(matchingOfferCreated)
 
         domain.assertNoOffersDemoted()
-        domain.assertOffersPromoted(OfferPromoted(
-            publishedAt = domain.clock(), // promoted when 'promotion activated' was handled
-            offerId = matchingOfferCreated.offerId,
-            promotionId = promoActivated.promotionId,
-        ))
+        domain.assertOffersPromoted(
+            OfferPromoted(
+                publishedAt = domain.clock(), // promoted when 'promotion activated' was handled
+                offerId = matchingOfferCreated.offerId,
+                promotionId = promoActivated.promotionId,
+            )
+        )
     }
 
     @Test
@@ -68,10 +71,5 @@ class FunctionalTest {
 
         domain.assertNoOffersDemoted()
         domain.assertNoOffersPromoted()
-    }
-
-    @Test
-    @Disabled("not implemented")
-    fun `given offer promoted when promo is deleted then notifies offer demoted`() {
     }
 }

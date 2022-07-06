@@ -1,8 +1,9 @@
-package softwarebrewery.demo.domain
+package softwarebrewery.demo.domain.model
 
-import softwarebrewery.demo.testing.namedRandom
-import java.time.Instant
-import java.time.Instant.now
+import softwarebrewery.demo.domain.api.*
+import softwarebrewery.demo.testing.*
+import java.time.*
+import java.time.Instant.*
 
 fun aCountry(): Country =
     setOf("BE", "NL").random()

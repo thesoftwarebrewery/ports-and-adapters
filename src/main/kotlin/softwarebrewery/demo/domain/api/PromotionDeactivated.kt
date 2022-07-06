@@ -1,11 +1,11 @@
-package softwarebrewery.demo.domain.model
+package softwarebrewery.demo.domain.api
 
 import softwarebrewery.demo.domain.*
+import softwarebrewery.demo.domain.model.*
 import java.time.*
 
 @DomainEvent
-data class OfferPromoted(
+data class PromotionDeactivated(
     val publishedAt: Instant,
-    val offerId: OfferId,
     val promotionId: PromotionId,
 )

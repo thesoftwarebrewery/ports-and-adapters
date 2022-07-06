@@ -1,17 +1,20 @@
 package softwarebrewery.demo.domain.ports
 
-import java.time.Duration
-import java.time.Instant
-import java.time.temporal.ChronoUnit
+import java.time.*
+import java.time.Instant.*
+import java.time.temporal.*
+import kotlin.time.*
+import kotlin.time.Duration
 
 class FakeClock : Clock {
 
-    private var current = Instant.now().truncatedTo(ChronoUnit.DAYS) // zero out 'detailed' time for easier readability
+    // zero out 'noisy' units more precise than a second, simplifying timestamp comparison by humans
+    private var current = now().truncatedTo(ChronoUnit.HOURS)
 
     override fun invoke(): Instant = current
 
-    fun advance(): Instant {
-        current.plus(Duration.ofSeconds(1)).also { current = it }
+    fun advance(duration: Duration): Instant {
+        current.plus(duration.toJavaDuration()).also { current = it }
         return current
     }
 }

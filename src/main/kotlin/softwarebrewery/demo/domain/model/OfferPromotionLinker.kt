@@ -1,9 +1,6 @@
-package softwarebrewery.demo.domain.ports
+package softwarebrewery.demo.domain.model
 
-import softwarebrewery.demo.domain.model.Offer
-import softwarebrewery.demo.domain.model.OfferPromoted
-import softwarebrewery.demo.domain.model.Promotion
-import softwarebrewery.demo.domain.model.appliesTo
+import softwarebrewery.demo.domain.ports.*
 
 class OfferPromotionLinker(
     private val offerRepository: OfferRepository,
