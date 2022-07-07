@@ -1,4 +1,4 @@
-package softwarebrewery.demo.adapters
+package softwarebrewery.demo
 
 import com.google.cloud.spring.pubsub.*
 import com.google.pubsub.v1.*
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.*
 import org.springframework.boot.test.context.*
 import javax.annotation.*
 
-private val log = KotlinLogging.logger {  }
+private val log = KotlinLogging.logger { }
 
 @TestConfiguration
 class PubSubTestConfig(
@@ -46,6 +46,7 @@ private fun PubSubAdmin.deleteTopicIfExists(topic: String) {
         deleteTopic(topic)
     }
 }
+
 private fun nameOf(subscription: Subscription) = subscription.name.substringAfterLast("/")
 private fun PubSubAdmin.hasSubscription(subscription: String) = listSubscriptions().any { nameOf(it) == subscription }
 private fun PubSubAdmin.deleteSubscriptionIfExists(subscription: String) {
