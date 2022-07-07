@@ -1,7 +1,6 @@
-package softwarebrewery.demo.adapters
+package softwarebrewery.demo.adapters.application
 
 import org.springframework.context.annotation.*
-import softwarebrewery.demo.adapters.application.*
 import java.time.*
 
 @Configuration

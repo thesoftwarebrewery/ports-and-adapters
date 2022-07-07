@@ -1,8 +1,7 @@
-package softwarebrewery.demo.adapters
+package softwarebrewery.demo.adapters.promo
 
 import org.springframework.beans.factory.annotation.*
 import org.springframework.context.annotation.*
-import softwarebrewery.demo.adapters.promo.*
 import softwarebrewery.demo.domain.api.*
 import softwarebrewery.demo.infra.pubsub.*
 

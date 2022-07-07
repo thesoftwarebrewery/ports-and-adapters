@@ -1,4 +1,4 @@
-package softwarebrewery.demo
+package softwarebrewery.demo.domain
 
 import org.springframework.context.annotation.*
 import softwarebrewery.demo.domain.api.*

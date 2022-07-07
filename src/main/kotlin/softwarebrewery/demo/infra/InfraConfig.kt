@@ -1,4 +1,4 @@
-package softwarebrewery.demo
+package softwarebrewery.demo.infra
 
 import com.google.api.gax.core.*
 import com.google.cloud.spring.pubsub.core.*
