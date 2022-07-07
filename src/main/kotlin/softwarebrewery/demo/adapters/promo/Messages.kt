@@ -33,4 +33,3 @@ data class PromotionMessage(
 }
 
 enum class Country { BE, NL }
-enum class ChangeType { CREATE, DELETE }
