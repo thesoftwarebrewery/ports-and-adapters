@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  pubsub:
+    container_name: pubsub
+    hostname: pubsub
+    image: google/cloud-sdk:latest
+    command: [ "bash", "-c", "/usr/bin/gcloud beta emulators pubsub start --project=demo --host-port=0.0.0.0:8084" ]
+    ports:
+      - "8084:8084"
+  postgres:
+    container_name: postgres
+    hostname: postgres
+    image: postgres:13.4-alpine
+    environment:
+      - POSTGRES_DB=demo
+      - POSTGRES_USER=demo-app
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
