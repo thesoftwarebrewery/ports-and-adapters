@@ -1,4 +1,4 @@
-package softwarebrewery.demo.adapters.promo
+package softwarebrewery.demo.adapters.offers
 
 import com.fasterxml.jackson.databind.*
 import com.fasterxml.jackson.datatype.jsr310.*
@@ -7,10 +7,16 @@ import java.nio.*
 import java.nio.charset.StandardCharsets.*
 import java.time.*
 
-// owned by promo
-data class PromotionMessage(
-    val timestampUtc: Instant?,
-    val promotionId: String?,
+class MessageAttributes {
+
+    companion object {
+        const val EVENT_TYPE = "event_type"
+    }
+}
+
+data class ExternalOfferCreated(
+    val createdAt: Instant?,
+    val offerId: String?,
     val productId: String?,
     val country: String?,
 ) {
@@ -19,17 +25,11 @@ data class PromotionMessage(
 
     companion object {
 
-        const val CHANGE_TYPE_ATTRIBUTE = "change_type"
-        const val CHANGE_TYPE_CREATE = "CREATE"
-        const val CHANGE_TYPE_DELETE = "DELETE"
-
         val jackson = jacksonObjectMapper()
             .registerModule(JavaTimeModule())
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)!!
 
-        fun fromJsonBytes(bytes: ByteBuffer): PromotionMessage = jackson.readValue(UTF_8.decode(bytes).toString())
+        fun fromJsonBytes(bytes: ByteBuffer): ExternalOfferCreated = jackson.readValue(UTF_8.decode(bytes).toString())
 
     }
 }
-
-enum class Country { BE, NL }

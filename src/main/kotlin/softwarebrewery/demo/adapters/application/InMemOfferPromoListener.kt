@@ -1,8 +1,10 @@
 package softwarebrewery.demo.adapters.application
 
+import softwarebrewery.demo.domain.*
 import softwarebrewery.demo.domain.model.*
 import softwarebrewery.demo.domain.ports.*
 
+@DrivenAdapter
 class InMemOfferPromoListener : OfferPromotionListener {
 
     private val promoted = mutableListOf<OfferPromoted>()

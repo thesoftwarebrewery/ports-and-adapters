@@ -6,13 +6,13 @@ import org.springframework.stereotype.*
 import softwarebrewery.demo.technical.*
 
 @Component
-class FakePromo(
+class FakePromos(
     @Value("\${pubsub.promo.promotion-events.topic}") val promotionEventsTopic: String,
     @Value("\${pubsub.promo.promotion-events.subscription}") val promotionEventsSubscription: String,
     private val pubSub: PubSubOperations,
 ) {
 
-    fun publishes(message: PromotionMessage) =
+    fun publish(message: PromotionMessage) =
         pubSub.publishSync(promotionEventsTopic, aPubSubMessage(data = message.toJson()))
 
 }

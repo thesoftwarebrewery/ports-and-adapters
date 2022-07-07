@@ -32,8 +32,8 @@ class PubSubPromotionAdapterIT(
         val promotionJson = """
             {
               "timestampUtc": "2022-07-05T10:00:00.000000Z",
-              "promotionId": 69,
-              "productId": 42,
+              "promotionId": "69",
+              "productId": "42",
               "country": "BE"
             }
         """.trimIndent()

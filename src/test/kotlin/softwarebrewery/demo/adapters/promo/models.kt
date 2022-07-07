@@ -1,11 +1,12 @@
 import softwarebrewery.demo.*
 import softwarebrewery.demo.adapters.promo.*
 import java.time.*
+import java.time.Instant.*
 
 fun aPromotionMessage(
-    timestamp: Instant = Instant.now(),
-    promotionId: Int = randomInt(),
-    productId: Int = randomInt(),
+    timestamp: Instant = now(),
+    promotionId: String = namedRandom("promotion"),
+    productId: String = namedRandom("product"),
     country: String = Country.values().random().name,
 ) = PromotionMessage(
     timestampUtc = timestamp,

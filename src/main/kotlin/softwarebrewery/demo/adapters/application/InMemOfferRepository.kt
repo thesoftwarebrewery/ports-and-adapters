@@ -1,10 +1,12 @@
 package softwarebrewery.demo.adapters.application
 
+import softwarebrewery.demo.domain.*
 import softwarebrewery.demo.domain.model.*
 import softwarebrewery.demo.domain.ports.*
 import java.time.*
 import java.util.concurrent.*
 
+@DrivenAdapter
 class InMemOfferRepository(
     private val clock: () -> Instant,
 ) : OfferRepository {
