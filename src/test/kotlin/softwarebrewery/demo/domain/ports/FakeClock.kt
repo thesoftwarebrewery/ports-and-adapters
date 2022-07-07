@@ -6,7 +6,7 @@ import java.time.temporal.*
 import kotlin.time.*
 import kotlin.time.Duration
 
-class FakeClock : Clock {
+class FakeClock : Clock, () -> Instant {
 
     // zero out 'noisy' units more precise than a second, simplifying timestamp comparison by humans
     private var current = now().truncatedTo(ChronoUnit.HOURS)

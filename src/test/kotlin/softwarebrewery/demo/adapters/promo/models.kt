@@ -4,12 +4,12 @@ import java.time.*
 
 fun aPromotionMessage(
     timestamp: Instant = Instant.now(),
-    changeType: String = ChangeType.values().random().name,
+    promotionId: Int = randomInt(),
     productId: Int = randomInt(),
-    countries: Set<String> = setOf(Country.values().random().name),
+    country: String = Country.values().random().name,
 ) = PromotionMessage(
     timestampUtc = timestamp,
-    changeType = changeType,
+    promotionId = promotionId,
     productId = productId,
-    countries = countries,
+    country = country,
 )

@@ -1,10 +1,11 @@
 package softwarebrewery.demo.domain.ports
 
 import softwarebrewery.demo.domain.model.*
+import java.time.*
 import java.util.concurrent.*
 
 class InMemPromotionRepository(
-    private val clock: Clock,
+    private val clock: () -> Instant,
 ) : PromotionRepository {
 
     private val records = ConcurrentHashMap<PromotionId, Promotion>()

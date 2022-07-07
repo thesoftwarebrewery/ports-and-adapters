@@ -11,16 +11,16 @@ fun PubSubOperations.publishSync(topic: String, message: PubsubMessage) {
 }
 
 fun aPubSubMessage(
-    data: String,
     attributes: Map<String, String> = emptyMap(),
+    data: String,
 ) = aPubSubMessage(
     attributes = attributes,
     data = ByteString.copyFromUtf8(data),
 )
 
 fun aPubSubMessage(
-    data: ByteString,
     attributes: Map<String, String> = emptyMap(),
+    data: ByteString,
 ) = PubsubMessage.newBuilder()
     .putAllAttributes(attributes)
     .setData(data)

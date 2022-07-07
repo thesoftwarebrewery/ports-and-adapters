@@ -1,13 +1,15 @@
 package softwarebrewery.demo.domain.model
 
+import org.springframework.transaction.annotation.*
 import softwarebrewery.demo.domain.api.*
 import softwarebrewery.demo.domain.ports.*
 
+@Transactional
 class DomainHandler(
     private val offerRepository: OfferRepository,
     private val promotionRepository: PromotionRepository,
-    private val offerPromotionListener: OfferPromotionListener,
-    private val clock: Clock,
+    offerPromotionListener: OfferPromotionListener,
+    clock: Clock,
 ) : DomainApi {
 
     private val offerPromotionLinker = OfferPromotionLinker(
