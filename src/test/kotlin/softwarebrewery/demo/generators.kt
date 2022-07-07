@@ -1,4 +1,4 @@
-package softwarebrewery.demo.testing
+package softwarebrewery.demo
 
 import kotlin.random.*
 

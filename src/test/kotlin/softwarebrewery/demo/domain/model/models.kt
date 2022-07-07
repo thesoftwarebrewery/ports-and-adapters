@@ -1,7 +1,7 @@
 package softwarebrewery.demo.domain.model
 
+import softwarebrewery.demo.*
 import softwarebrewery.demo.domain.api.*
-import softwarebrewery.demo.testing.*
 import java.time.*
 import java.time.Instant.*
 
