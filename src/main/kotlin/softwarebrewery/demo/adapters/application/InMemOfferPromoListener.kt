@@ -1,6 +1,7 @@
-package softwarebrewery.demo.domain.ports
+package softwarebrewery.demo.adapters.application
 
 import softwarebrewery.demo.domain.model.*
+import softwarebrewery.demo.domain.ports.*
 
 class InMemOfferPromoListener : OfferPromotionListener {
 

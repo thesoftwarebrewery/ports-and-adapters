@@ -14,15 +14,6 @@ class DomainConfig {
     fun clock(systemClock: () -> Instant) = Clock { systemClock() }
 
     @Bean
-    fun offerRepository(clock: () -> Instant) = InMemOfferRepository(clock)
-
-    @Bean
-    fun promotionRepository(clock: () -> Instant) = InMemPromotionRepository(clock)
-
-    @Bean
-    fun offerPromotionListener() = InMemOfferPromoListener()
-
-    @Bean
     fun domainApi(
         offerRepository: OfferRepository,
         promotionRepository: PromotionRepository,

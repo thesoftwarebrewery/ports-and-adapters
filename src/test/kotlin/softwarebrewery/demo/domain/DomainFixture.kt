@@ -1,6 +1,7 @@
 package softwarebrewery.demo.domain
 
 import org.assertj.core.api.Assertions.*
+import softwarebrewery.demo.adapters.application.*
 import softwarebrewery.demo.domain.model.*
 import softwarebrewery.demo.domain.ports.*
 import kotlin.time.Duration.Companion.seconds
