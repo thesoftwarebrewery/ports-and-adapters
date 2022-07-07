@@ -11,8 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.*
 import org.springframework.boot.test.mock.mockito.*
 import org.springframework.context.annotation.*
 import org.springframework.test.context.*
-import softwarebrewery.demo.*
 import softwarebrewery.demo.domain.api.*
+import softwarebrewery.demo.infra.*
 import softwarebrewery.demo.technical.*
 import java.time.Instant.*
 
