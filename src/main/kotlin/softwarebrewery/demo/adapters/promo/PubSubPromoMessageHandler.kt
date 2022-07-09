@@ -4,7 +4,6 @@ import softwarebrewery.demo.adapters.promo.MessageAttributes.Companion.CHANGE_TY
 import softwarebrewery.demo.adapters.promo.MessageAttributes.Companion.CHANGE_TYPE_CREATE
 import softwarebrewery.demo.adapters.promo.MessageAttributes.Companion.CHANGE_TYPE_DELETE
 import softwarebrewery.demo.domain.*
-import softwarebrewery.demo.domain.api.*
 import softwarebrewery.demo.infra.pubsub.*
 import java.nio.*
 

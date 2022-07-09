@@ -1,6 +1,6 @@
 package softwarebrewery.demo.adapters.promo
 
-import softwarebrewery.demo.domain.api.*
+import softwarebrewery.demo.domain.*
 
 fun PromotionMessage.toDomainPromotionActivated() =
     PromotionActivated(

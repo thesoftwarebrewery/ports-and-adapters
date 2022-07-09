@@ -1,6 +1,6 @@
 package softwarebrewery.demo.adapters.offer
 
-import softwarebrewery.demo.domain.api.*
+import softwarebrewery.demo.domain.*
 
 fun ExternalOfferCreated.toDomainOfferCreated() =
     OfferCreated(

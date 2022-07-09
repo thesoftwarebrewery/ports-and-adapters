@@ -27,9 +27,9 @@ class DomainFixture {
     }
 
     private fun dispatch(message: Any, receiver: Any) {
-        val handlerMethod = receiver.javaClass.methods.singleOrNull {
+        val handlerMethod = receiver::class.java.methods.singleOrNull {
             it.name.equals("handle") && it.parameterCount == 1 && it.parameterTypes[0].isInstance(message)
-        } ?: throw UnsupportedOperationException("'${receiver.javaClass.simpleName}' has no 'handle(${message.javaClass.simpleName})'")
+        } ?: throw NoSuchMethodException("${receiver::class.simpleName}.handle(${message::class.simpleName})")
 
         handlerMethod.invoke(receiver, message)
     }

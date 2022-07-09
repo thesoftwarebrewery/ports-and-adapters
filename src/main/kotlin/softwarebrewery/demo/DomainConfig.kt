@@ -2,7 +2,7 @@ package softwarebrewery.demo
 
 import org.springframework.context.annotation.*
 import org.springframework.transaction.annotation.*
-import softwarebrewery.demo.domain.api.*
+import softwarebrewery.demo.domain.*
 import softwarebrewery.demo.domain.model.*
 import softwarebrewery.demo.domain.ports.*
 import softwarebrewery.demo.domain.ports.Clock

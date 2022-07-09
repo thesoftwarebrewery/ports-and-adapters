@@ -3,7 +3,6 @@ package softwarebrewery.demo.adapters.offer
 import softwarebrewery.demo.adapters.offer.MessageAttributes.Companion.EVENT_TYPE
 import softwarebrewery.demo.adapters.offer.MessageAttributes.Companion.EVENT_TYPE_OFFER_CREATED
 import softwarebrewery.demo.domain.*
-import softwarebrewery.demo.domain.api.*
 import softwarebrewery.demo.infra.pubsub.*
 import java.nio.*
 

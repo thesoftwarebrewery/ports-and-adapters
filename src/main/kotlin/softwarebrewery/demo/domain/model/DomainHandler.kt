@@ -1,7 +1,7 @@
 package softwarebrewery.demo.domain.model
 
 import org.springframework.transaction.annotation.*
-import softwarebrewery.demo.domain.api.*
+import softwarebrewery.demo.domain.*
 import softwarebrewery.demo.domain.ports.*
 
 @Transactional

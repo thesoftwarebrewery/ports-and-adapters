@@ -3,7 +3,7 @@ package softwarebrewery.demo
 import org.springframework.beans.factory.annotation.*
 import org.springframework.context.annotation.*
 import softwarebrewery.demo.adapters.offer.*
-import softwarebrewery.demo.domain.api.*
+import softwarebrewery.demo.domain.*
 import softwarebrewery.demo.domain.ports.*
 import softwarebrewery.demo.infra.pubsub.*
 
