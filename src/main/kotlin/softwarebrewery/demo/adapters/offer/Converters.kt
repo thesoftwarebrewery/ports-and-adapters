@@ -1,4 +1,4 @@
-package softwarebrewery.demo.adapters.offers
+package softwarebrewery.demo.adapters.offer
 
 import softwarebrewery.demo.domain.api.*
 

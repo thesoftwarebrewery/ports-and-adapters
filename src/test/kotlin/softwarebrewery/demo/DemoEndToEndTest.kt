@@ -1,35 +1,42 @@
 package softwarebrewery.demo
 
-import aPromotionMessage
-import anExternalOfferCreated
 import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.*
+import org.springframework.boot.test.context.*
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.*
 import org.springframework.context.annotation.*
-import softwarebrewery.demo.adapters.application.*
-import softwarebrewery.demo.adapters.offers.*
+import org.springframework.test.context.*
+import softwarebrewery.demo.adapters.offer.*
 import softwarebrewery.demo.adapters.promo.*
+import softwarebrewery.demo.domain.model.*
 import softwarebrewery.demo.infra.*
+import java.time.Instant.*
 
+@ActiveProfiles("it")
 @Import(PubSubTestConfig::class)
+@SpringBootTest(webEnvironment = NONE)
 class DemoEndToEndTest(
-    @Autowired val promos: FakePromos,
-    @Autowired val offers: FakeOffers,
-    @Autowired val promotedOffersDashboard: PromotedOffersDashboard,
+    @Autowired val promoApplication: FakePromoApplication,
+    @Autowired val offerApplication: FakeOfferApplication,
 ) {
 
     @Test
     fun `given existing offer when matching promo is activated then notifies offer promoted`() {
-        val offerCreated = anExternalOfferCreated()
-        val productId = offerCreated.productId!!
-        val country = offerCreated.country!!
-        val matchingPromotion = aPromotionMessage(
-            productId = productId,
-            country = country,
+        val productId = namedRandom("product")
+        val offerId = namedRandom("offer")
+        val promotionId = namedRandom("promotionId")
+        val country = "NL"
+        offerApplication.createOffer(offerId = offerId, productId = productId, country = country)
+
+        promoApplication.createPromotion(promotionId = promotionId, productId = productId, country = country)
+
+        offerApplication.hasReceived(
+            OfferPromoted(
+                publishedAt = now(),
+                offerId = offerId,
+                promotionId = promotionId,
+                country = country,
+            )
         )
-        offers.publish(offerCreated)
-
-        promos.publish(matchingPromotion)
-
-        promotedOffersDashboard.showsPromoted(country, productId)
     }
 }

@@ -5,7 +5,7 @@ import softwarebrewery.demo.domain.model.*
 import softwarebrewery.demo.domain.ports.*
 
 @DrivenAdapter
-class InMemOfferPromoListener : OfferPromotionListener {
+class InMemOfferPromoListener : OfferPromoListener {
 
     private val promoted = mutableListOf<OfferPromoted>()
     private val demoted = mutableListOf<OfferUnPromoted>()
@@ -13,11 +13,11 @@ class InMemOfferPromoListener : OfferPromotionListener {
     val offersPromoted get() : List<OfferPromoted> = promoted
     val offersDemoted get() : List<OfferUnPromoted> = demoted
 
-    override fun handle(offerPromoted: OfferPromoted) {
-        promoted.add(offerPromoted)
+    override fun handle(event: OfferPromoted) {
+        promoted.add(event)
     }
 
-    override fun handle(offerUnPromoted: OfferUnPromoted) {
-        demoted.add(offerUnPromoted)
+    override fun handle(event: OfferUnPromoted) {
+        demoted.add(event)
     }
 }

@@ -1,6 +1,7 @@
-package softwarebrewery.demo.adapters.application
+package softwarebrewery.demo
 
 import org.springframework.context.annotation.*
+import softwarebrewery.demo.adapters.application.*
 import java.time.*
 
 @Configuration
@@ -10,9 +11,6 @@ class ApplicationAdapterConfig {
     fun offerRepository(clock: () -> Instant) = InMemOfferRepository(clock)
 
     @Bean
-    fun promotionRepository(clock: () -> Instant) = InMemPromotionRepository(clock)
-
-    @Bean
-    fun offerPromotionListener() = InMemOfferPromoListener()
+    fun promotionRepository(clock: () -> Instant) = InMemPromoRepository(clock)
 
 }

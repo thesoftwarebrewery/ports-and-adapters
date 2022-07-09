@@ -7,5 +7,6 @@ import java.time.*
 data class OfferPromoted(
     val publishedAt: Instant,
     val offerId: OfferId,
+    val country: Country,
     val promotionId: PromotionId,
 )

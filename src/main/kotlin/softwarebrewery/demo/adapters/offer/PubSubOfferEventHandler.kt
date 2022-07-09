@@ -1,5 +1,7 @@
-package softwarebrewery.demo.adapters.offers
+package softwarebrewery.demo.adapters.offer
 
+import softwarebrewery.demo.adapters.offer.MessageAttributes.Companion.EVENT_TYPE
+import softwarebrewery.demo.adapters.offer.MessageAttributes.Companion.EVENT_TYPE_OFFER_CREATED
 import softwarebrewery.demo.domain.*
 import softwarebrewery.demo.domain.api.*
 import softwarebrewery.demo.infra.pubsub.*
@@ -13,8 +15,8 @@ class PubSubOfferEventHandler(
     override fun invoke(attributes: Map<String, String>, data: ByteBuffer) {
         val offerCreated = ExternalOfferCreated.fromJsonBytes(data)
 
-        when (val eventType = attributes[MessageAttributes.EVENT_TYPE]) {
-            "OFFER_CREATED" -> domainApi.handle(offerCreated.toDomainOfferCreated())
+        when (val eventType = attributes[EVENT_TYPE]) {
+            EVENT_TYPE_OFFER_CREATED -> domainApi.handle(offerCreated.toDomainOfferCreated())
             else -> throw UnsupportedOperationException(eventType)
         }
     }

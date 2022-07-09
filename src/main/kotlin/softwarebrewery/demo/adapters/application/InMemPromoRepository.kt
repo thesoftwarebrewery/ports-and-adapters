@@ -7,7 +7,7 @@ import java.time.*
 import java.util.concurrent.*
 
 @DrivenAdapter
-class InMemPromotionRepository(
+class InMemPromoRepository(
     private val clock: () -> Instant,
 ) : PromotionRepository {
 

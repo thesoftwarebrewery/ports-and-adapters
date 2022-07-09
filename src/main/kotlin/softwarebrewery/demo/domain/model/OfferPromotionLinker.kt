@@ -5,7 +5,7 @@ import softwarebrewery.demo.domain.ports.*
 class OfferPromotionLinker(
     private val offerRepository: OfferRepository,
     private val promotionRepository: PromotionRepository,
-    private val offerPromotionListener: OfferPromotionListener,
+    private val offerPromoListener: OfferPromoListener,
     private val clock: Clock,
 ) {
 
@@ -18,8 +18,9 @@ class OfferPromotionLinker(
                     publishedAt = appliedAt,
                     offerId = it.offerId,
                     promotionId = promo.promotionId,
+                    country = it.country,
                 )
-            }.forEach { offerPromotionListener.handle(it) }
+            }.forEach { offerPromoListener.handle(it) }
     }
 
     fun linkPromosToOffer(offer: Offer) {
@@ -31,7 +32,8 @@ class OfferPromotionLinker(
                     publishedAt = appliedAt,
                     offerId = offer.offerId,
                     promotionId = it.promotionId,
+                    country = it.country,
                 )
-            }.forEach { offerPromotionListener.handle(it) }
+            }.forEach { offerPromoListener.handle(it) }
     }
 }

@@ -21,9 +21,10 @@ class FunctionalTest {
         domain.assertNoOffersDemoted()
         domain.assertOffersPromoted(
             OfferPromoted(
-                publishedAt = domain.clock(), // promoted when 'promotion activated' was handled
+                publishedAt = domain.time,
                 offerId = offerCreated.offerId,
                 promotionId = matchingPromoActivated.promotionId,
+                country = matchingPromoActivated.country,
             )
         )
     }
@@ -54,9 +55,10 @@ class FunctionalTest {
         domain.assertNoOffersDemoted()
         domain.assertOffersPromoted(
             OfferPromoted(
-                publishedAt = domain.clock(), // promoted when 'promotion activated' was handled
+                publishedAt = domain.time,
                 offerId = matchingOfferCreated.offerId,
                 promotionId = promoActivated.promotionId,
+                country = promoActivated.country,
             )
         )
     }

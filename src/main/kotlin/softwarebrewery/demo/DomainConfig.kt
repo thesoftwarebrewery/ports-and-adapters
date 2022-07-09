@@ -1,6 +1,7 @@
-package softwarebrewery.demo.domain
+package softwarebrewery.demo
 
 import org.springframework.context.annotation.*
+import org.springframework.transaction.annotation.*
 import softwarebrewery.demo.domain.api.*
 import softwarebrewery.demo.domain.model.*
 import softwarebrewery.demo.domain.ports.*
@@ -17,12 +18,18 @@ class DomainConfig {
     fun domainApi(
         offerRepository: OfferRepository,
         promotionRepository: PromotionRepository,
-        offerPromotionListener: OfferPromotionListener,
+        offerPromoListener: OfferPromoListener,
         clock: Clock,
-    ): DomainApi = DomainHandler(
-        offerRepository = offerRepository,
-        promotionRepository = promotionRepository,
-        offerPromotionListener = offerPromotionListener,
-        clock = clock,
+    ): DomainApi = TransactionalDomainHandler(
+        domainApi = DomainHandler(
+            offerRepository = offerRepository,
+            promotionRepository = promotionRepository,
+            offerPromoListener = offerPromoListener,
+            clock = clock,
+        )
     )
+
+    @Transactional
+    class TransactionalDomainHandler(domainApi: DomainApi) : DomainApi by domainApi
+
 }

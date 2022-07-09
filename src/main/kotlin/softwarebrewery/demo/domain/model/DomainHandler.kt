@@ -8,14 +8,14 @@ import softwarebrewery.demo.domain.ports.*
 class DomainHandler(
     private val offerRepository: OfferRepository,
     private val promotionRepository: PromotionRepository,
-    offerPromotionListener: OfferPromotionListener,
+    offerPromoListener: OfferPromoListener,
     clock: Clock,
 ) : DomainApi {
 
     private val offerPromotionLinker = OfferPromotionLinker(
         offerRepository = offerRepository,
         promotionRepository = promotionRepository,
-        offerPromotionListener = offerPromotionListener,
+        offerPromoListener = offerPromoListener,
         clock = clock,
     )
 

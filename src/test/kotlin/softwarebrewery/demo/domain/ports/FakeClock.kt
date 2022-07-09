@@ -13,7 +13,7 @@ class FakeClock : Clock, () -> Instant {
 
     override fun invoke(): Instant = current
 
-    fun advance(duration: Duration): Instant {
+    fun forward(duration: Duration): Instant {
         current.plus(duration.toJavaDuration()).also { current = it }
         return current
     }

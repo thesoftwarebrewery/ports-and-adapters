@@ -8,20 +8,21 @@ import kotlin.time.Duration.Companion.seconds
 
 class DomainFixture {
 
-    val clock = FakeClock()
-
+    private val clock = FakeClock()
     private val offerRepository = InMemOfferRepository(clock)
-    private val promotionRepository = InMemPromotionRepository(clock)
+    private val promotionRepository = InMemPromoRepository(clock)
     private val offerPromotionListener = InMemOfferPromoListener()
     private val domainHandler = DomainHandler(
         offerRepository = offerRepository,
         promotionRepository = promotionRepository,
-        offerPromotionListener = offerPromotionListener,
+        offerPromoListener = offerPromotionListener,
         clock = clock,
     )
 
+    val time get() = clock()
+
     fun handle(vararg messages: Any) = messages.forEach {
-        clock.advance(1.seconds)
+        clock.forward(1.seconds)
         dispatch(it, domainHandler)
     }
 

@@ -1,5 +1,6 @@
+package softwarebrewery.demo.adapters.offer
+
 import softwarebrewery.demo.*
-import softwarebrewery.demo.adapters.offers.*
 import java.time.*
 
 fun anExternalOfferCreated(

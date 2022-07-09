@@ -1,57 +1,34 @@
 package softwarebrewery.demo.infra
 
 import com.google.cloud.spring.pubsub.*
-import com.google.pubsub.v1.*
-import mu.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.boot.test.context.*
 import javax.annotation.*
 
-private val log = KotlinLogging.logger { }
-
 @TestConfiguration
 class PubSubTestConfig(
     private val pubSubAdmin: PubSubAdmin,
-    @Value("\${pubsub.promo.promotion-events.topic}") private val promotionsTopic: String,
-    @Value("\${pubsub.promo.promotion-events.subscription}") private val promotionsSubscription: String,
+    @Value("\${pubsub.promo.promo-events.topic}") private val promoTopic: String,
+    @Value("\${pubsub.promo.promo-events.subscription}") private val promoSubscription: String,
+    @Value("\${pubsub.offer.offer-events.topic}") private val offerTopic: String,
+    @Value("\${pubsub.offer.offer-events.subscription}") private val offerSubscription: String,
+    @Value("\${pubsub.offer.offer-promo-events.topic}") private val offerPromoTopic: String,
+    @Value("\${pubsub.offer.offer-promo-events.subscription}") private val offerPromoSubscription: String,
 ) {
-    private val topicSubscriptions = setOf(
-        TopicSubscription(promotionsTopic, promotionsSubscription),
+
+    private val subscriptions = setOf(
+        promoTopic to promoSubscription,
+        offerTopic to offerSubscription,
+        offerPromoTopic to offerPromoSubscription,
     )
 
     @PostConstruct
     fun recreateTopicSubscriptions() {
-        topicSubscriptions.reversed().forEach { pubSubAdmin.deleteSubscriptionIfExists(it.subscription) }
-        topicSubscriptions.reversed().forEach { pubSubAdmin.deleteTopicIfExists(it.topic) }
-        topicSubscriptions.forEach {
-            if (!pubSubAdmin.hasTopic(it.topic)) {
-                log.info { "Creating topic '${it.topic}'" }
-                pubSubAdmin.createTopic(it.topic)
-            }
-            if (!pubSubAdmin.hasSubscription(it.subscription)) {
-                log.info { "Creating subscription '${it.subscription}'" }
-                pubSubAdmin.createSubscription(it.subscription, it.topic)
-            }
+        subscriptions.reversed().forEach { (_, subscription) -> pubSubAdmin.deleteSubscriptionIfExists(subscription) }
+        subscriptions.reversed().forEach { (topic, _) -> pubSubAdmin.deleteTopicIfExists(topic) }
+        subscriptions.forEach { (topic, subscription) ->
+            pubSubAdmin.createTopicIfNotExists(topic)
+            pubSubAdmin.createSubscriptionIfNotExists(topic = topic, subscription = subscription)
         }
-    }
-}
-
-private data class TopicSubscription(val topic: String, val subscription: String)
-
-private fun nameOf(topic: Topic): String = topic.name.substringAfterLast("/")
-private fun PubSubAdmin.hasTopic(topic: String) = listTopics().any { nameOf(it) == topic }
-private fun PubSubAdmin.deleteTopicIfExists(topic: String) {
-    if (hasTopic(topic)) {
-        log.info { "Deleting topic '$topic'" }
-        deleteTopic(topic)
-    }
-}
-
-private fun nameOf(subscription: Subscription) = subscription.name.substringAfterLast("/")
-private fun PubSubAdmin.hasSubscription(subscription: String) = listSubscriptions().any { nameOf(it) == subscription }
-private fun PubSubAdmin.deleteSubscriptionIfExists(subscription: String) {
-    if (hasSubscription(subscription)) {
-        log.info { "Deleting subscription '$subscription'" }
-        deleteSubscription(subscription)
     }
 }
