@@ -3,7 +3,7 @@ package softwarebrewery.demo.infra
 import com.google.cloud.spring.pubsub.core.*
 import com.google.protobuf.*
 import com.google.pubsub.v1.*
-import org.assertj.core.api.*
+import org.assertj.core.api.Assertions.*
 import org.awaitility.Awaitility.*
 import org.awaitility.core.*
 import java.util.concurrent.TimeUnit.*
@@ -25,7 +25,7 @@ fun PubSubOperations.assertReceived(
         .conditionEvaluationListener(ConditionEvaluationLogger())
         .untilAsserted {
             val next = pullNext(subscription)
-            Assertions.assertThat(next).isNotNull
+            assertThat(next).isNotNull
             assert(next)
         }
 }

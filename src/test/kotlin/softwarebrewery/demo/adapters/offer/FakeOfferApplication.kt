@@ -1,7 +1,7 @@
 package softwarebrewery.demo.adapters.offer
 
 import com.google.cloud.spring.pubsub.core.*
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.stereotype.*
@@ -29,14 +29,14 @@ class FakeOfferApplication(
 
     fun hasReceived(expected: OfferPromoted) {
         pubSub.assertReceived(offerPromoEventsSubscription) {
-            Assertions.assertThat(it.attributesMap["event_type"]).isEqualTo("OFFER_PROMOTED")
+            assertThat(it.attributesMap["event_type"]).isEqualTo("OFFER_PROMOTED")
 
             val actual = assertDoesNotThrow { it.data.deserializeJsonAs<OfferPromoted>() }
 
-            Assertions.assertThat(actual.offerId).isEqualTo(expected.offerId)
-            Assertions.assertThat(actual.country).isEqualTo(expected.country)
-            Assertions.assertThat(actual.promotionId).isEqualTo(expected.promotionId)
-            Assertions.assertThat(actual.publishedAt).isBetween(Instant.now().minusSeconds(5), Instant.now())
+            assertThat(actual.offerId).isEqualTo(expected.offerId)
+            assertThat(actual.country).isEqualTo(expected.country)
+            assertThat(actual.promotionId).isEqualTo(expected.promotionId)
+            assertThat(actual.publishedAt).isBetween(Instant.now().minusSeconds(5), Instant.now())
         }
     }
 }
