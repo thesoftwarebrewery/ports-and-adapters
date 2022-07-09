@@ -8,7 +8,7 @@ import softwarebrewery.demo.infra.pubsub.*
 import java.nio.*
 
 @DrivingAdapter
-class PubSubOfferEventHandler(
+class PubSubOfferEventSubscriber(
     private val domainApi: DomainApi,
 ) : MessageHandler {
 

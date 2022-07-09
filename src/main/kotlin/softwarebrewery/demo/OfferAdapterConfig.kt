@@ -11,11 +11,11 @@ import softwarebrewery.demo.infra.pubsub.*
 class OfferAdapterConfig {
 
     @Bean
-    fun offerEventSubscriber(
+    fun pubSubOfferEventSubscriber(
         @Value("\${pubsub.offer.offer-events.subscription}") subscription: String,
         subscribe: NewPubSubSubscriber,
         domainApi: DomainApi,
-    ) = subscribe(subscription, PubSubOfferEventHandler(domainApi))
+    ) = subscribe(subscription, PubSubOfferEventSubscriber(domainApi))
 
     @Bean
     fun offerPromoEventPublisher(
