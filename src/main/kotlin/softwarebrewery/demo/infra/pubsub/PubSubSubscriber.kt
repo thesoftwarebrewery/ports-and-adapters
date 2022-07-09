@@ -10,7 +10,10 @@ import java.nio.*
 import java.util.concurrent.TimeUnit.*
 
 typealias Subscription = String
-typealias NewPubSubSubscriber = (subscription: Subscription, handler: MessageHandler) -> PubSubSubscriber
+
+fun interface NewPubSubSubscriber {
+    operator fun invoke(subscription: Subscription, handler: MessageHandler) : PubSubSubscriber
+}
 
 interface MessageHandler {
     operator fun invoke(attributes: Map<String, String>, data: ByteBuffer)

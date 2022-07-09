@@ -19,33 +19,30 @@ class DomainHandler(
         clock = clock,
     )
 
-    override fun handle(offerCreated: OfferCreated) {
+    override fun handle(event: OfferCreated) {
         offerRepository.saveOrUpdate(
             Offer(
-                publishedAt = offerCreated.publishedAt,
-                offerId = offerCreated.offerId,
-                productId = offerCreated.productId,
-                country = offerCreated.country,
+                publishedAt = event.publishedAt,
+                offerId = event.offerId,
+                productId = event.productId,
+                country = event.country,
             )
         )?.let { offerPromotionLinker.linkPromosToOffer(it.it) }
     }
 
-    override fun handle(offerDeleted: OfferDeleted) {
-        throw UnsupportedOperationException()
-    }
+    override fun handle(event: OfferDeleted): Unit = throw UnsupportedOperationException()
 
-    override fun handle(promotionActivated: PromotionActivated) {
+    override fun handle(event: PromotionActivated) {
         promotionRepository.saveOrUpdate(
             Promotion(
-                publishedAt = promotionActivated.publishedAt,
-                promotionId = promotionActivated.promotionId,
-                productId = promotionActivated.productId,
-                country = promotionActivated.country,
+                publishedAt = event.publishedAt,
+                promotionId = event.promotionId,
+                productId = event.productId,
+                country = event.country,
             )
         )?.let { offerPromotionLinker.linkOffersToPromo(it.it) }
     }
 
-    override fun handle(promotionDeactivated: PromotionDeactivated) {
-        throw UnsupportedOperationException()
-    }
+    override fun handle(event: PromotionDeactivated): Unit = throw UnsupportedOperationException()
+
 }

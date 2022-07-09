@@ -3,7 +3,7 @@ package softwarebrewery.demo
 import com.google.api.gax.core.*
 import com.google.cloud.spring.pubsub.core.*
 import mu.*
-import org.springframework.context.ApplicationEventPublisher
+import org.springframework.context.*
 import org.springframework.context.annotation.*
 import org.springframework.jdbc.core.namedparam.*
 import org.springframework.transaction.*
@@ -11,7 +11,7 @@ import softwarebrewery.demo.infra.pubsub.*
 import java.time.*
 import java.time.Instant.*
 
-private val log = KotlinLogging.logger {  }
+private val log = KotlinLogging.logger { }
 
 @Configuration
 class InfraConfig {
@@ -23,7 +23,7 @@ class InfraConfig {
     fun credentialsProvider() = NoCredentialsProvider()
 
     @Bean
-    fun newPubSubSubscriber(pubSubOps: PubSubOperations): NewPubSubSubscriber = { subscription, handler ->
+    fun newPubSubSubscriber(pubSubOps: PubSubOperations) = NewPubSubSubscriber { subscription, handler ->
         PubSubSubscriber(
             subscriberOps = pubSubOps,
             subscription = subscription,

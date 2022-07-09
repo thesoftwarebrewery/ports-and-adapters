@@ -4,8 +4,8 @@ import softwarebrewery.demo.domain.*
 
 @PrimaryPort
 interface DomainApi {
-    fun handle(promotionActivated: PromotionActivated)
-    fun handle(promotionDeactivated: PromotionDeactivated)
-    fun handle(offerCreated: OfferCreated)
-    fun handle(offerDeleted: OfferDeleted)
+    fun handle(event: OfferCreated)
+    fun handle(event: OfferDeleted)
+    fun handle(event: PromotionActivated)
+    fun handle(event: PromotionDeactivated)
 }
