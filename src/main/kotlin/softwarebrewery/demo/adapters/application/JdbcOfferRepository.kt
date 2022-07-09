@@ -4,6 +4,7 @@ import softwarebrewery.demo.domain.model.*
 import softwarebrewery.demo.domain.ports.*
 
 class JdbcOfferRepository(
+    
 ) : OfferRepository {
 
     override fun saveOrUpdate(offer: Offer): Modified<Offer>? {
