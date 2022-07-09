@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.*
 import org.springframework.boot.test.mock.mockito.*
 import org.springframework.context.annotation.*
 import org.springframework.test.context.*
+import softwarebrewery.demo.*
 import softwarebrewery.demo.domain.*
 import softwarebrewery.demo.infra.*
 import java.time.Instant.*
@@ -28,13 +29,15 @@ class PubSubOffersAdapterIT(
 
     @Test
     fun `when offer-created received then activates domain with promotion activated event`() {
+        val offerId = namedRandom("offer")
+        val productId = namedRandom("product")
         val promotionMessage = aPubSubMessage(
             attributes = mapOf("event_type" to "OFFER_CREATED"),
             data = """
                 {
                   "createdAt": "2022-07-05T11:00:00.000000Z",
-                  "offerId": "offer-22",
-                  "productId": "product-33",
+                  "offerId": "$offerId",
+                  "productId": "$productId",
                   "country": "NL"
                 }
             """.trimIndent()
@@ -49,8 +52,8 @@ class PubSubOffersAdapterIT(
             assertThat(domainMessage.firstValue).isEqualTo(
                 OfferCreated(
                     publishedAt = parse("2022-07-05T11:00:00.000000Z"),
-                    offerId = "offer-22",
-                    productId = "product-33",
+                    offerId = offerId,
+                    productId = productId,
                     country = "NL",
                 ),
             )

@@ -10,7 +10,7 @@ import softwarebrewery.demo.infra.*
 import java.time.*
 
 @Component
-class FakeOfferApplication(
+class FakeOfferDomain(
     @Value("\${pubsub.offer.offer-events.topic}") val offerEventsTopic: String,
     @Value("\${pubsub.offer.offer-promo-events.subscription}") val offerPromoEventsSubscription: String,
     private val pubSub: PubSubOperations,

@@ -16,8 +16,8 @@ import java.time.Instant.*
 @Import(PubSubTestConfig::class)
 @SpringBootTest(webEnvironment = NONE)
 class DemoEndToEndTest(
-    @Autowired val promoApplication: FakePromoApplication,
-    @Autowired val offerApplication: FakeOfferApplication,
+    @Autowired val promoDomain: FakePromoDomain,
+    @Autowired val offerDomain: FakeOfferDomain,
 ) {
 
     @Test
@@ -26,11 +26,11 @@ class DemoEndToEndTest(
         val offerId = namedRandom("offer")
         val promotionId = namedRandom("promotionId")
         val country = "NL"
-        offerApplication.createOffer(offerId = offerId, productId = productId, country = country)
+        offerDomain.createOffer(offerId = offerId, productId = productId, country = country)
 
-        promoApplication.createPromotion(promotionId = promotionId, productId = productId, country = country)
+        promoDomain.createPromotion(promotionId = promotionId, productId = productId, country = country)
 
-        offerApplication.hasReceived(
+        offerDomain.hasReceived(
             OfferPromoted(
                 publishedAt = now(),
                 offerId = offerId,

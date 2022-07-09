@@ -19,7 +19,7 @@ import java.time.Instant.*
 @Import(PubSubTestConfig::class)
 @SpringBootTest(webEnvironment = NONE)
 class PubSubPromoAdapterIT(
-    @Value("\${pubsub.promo.promo-events.topic}") val promotionEventsTopic: String,
+    @Value("\${pubsub.promo.promo-events.topic}") val promoEventsTopic: String,
     @Autowired val pubSub: PubSubOperations,
 ) {
 
@@ -40,7 +40,7 @@ class PubSubPromoAdapterIT(
             """.trimIndent()
         )
 
-        pubSub.publishSync(promotionEventsTopic, promotionMessage)
+        pubSub.publishSync(promoEventsTopic, promotionMessage)
 
         await().untilAsserted {
             val domainMessage = argumentCaptor<PromotionActivated>()

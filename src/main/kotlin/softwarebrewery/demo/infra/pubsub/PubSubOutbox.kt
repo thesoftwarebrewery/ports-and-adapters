@@ -19,9 +19,11 @@ import java.time.Instant.*
 import kotlin.time.*
 import kotlin.time.Duration
 
-interface PubSubOutbox {
+fun interface PubSubOutbox {
     fun post(messages: Collection<Message>)
 }
+
+fun PubSubOutbox.post(message: Message) = post(listOf(message))
 
 data class Message(
     val id: String,

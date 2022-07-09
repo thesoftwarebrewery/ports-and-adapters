@@ -6,9 +6,8 @@ import org.springframework.stereotype.*
 import softwarebrewery.demo.infra.*
 
 @Component
-class FakePromoApplication(
+class FakePromoDomain(
     @Value("\${pubsub.promo.promo-events.topic}") val promotionEventsTopic: String,
-    @Value("\${pubsub.promo.promo-events.subscription}") val promotionEventsSubscription: String,
     private val pubSub: PubSubOperations,
 ) {
 

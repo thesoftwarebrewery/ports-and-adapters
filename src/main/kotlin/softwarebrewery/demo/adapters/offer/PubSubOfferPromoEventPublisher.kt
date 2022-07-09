@@ -24,13 +24,11 @@ class PubSubOfferPromoEventPublisher(
             offerId = event.offerId,
         )
         pubSubOutbox.post(
-            listOf(
-                Message(
-                    id = randomUUID().toString(),
-                    topic = topic,
-                    attributes = mapOf(EVENT_TYPE to EVENT_TYPE_OFFER_PROMOTED),
-                    data = ByteBuffer.wrap(externalOfferPromotedEvent.toJson().toByteArray()),
-                )
+            Message(
+                id = randomUUID().toString(),
+                topic = topic,
+                attributes = mapOf(EVENT_TYPE to EVENT_TYPE_OFFER_PROMOTED),
+                data = ByteBuffer.wrap(externalOfferPromotedEvent.toJson().toByteArray()),
             )
         )
     }
