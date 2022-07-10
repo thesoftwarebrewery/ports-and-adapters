@@ -6,7 +6,7 @@ import softwarebrewery.demo.domain.ports.*
 class DomainHandler(
     private val offerRepository: OfferRepository,
     private val promoRepository: PromoRepository,
-    private val offerPromotionLinker: OfferPromoLinker,
+    private val offerPromoLinker: OfferPromoLinker,
 ) : DomainApi {
 
     override fun handle(event: OfferCreated) {
@@ -16,7 +16,7 @@ class DomainHandler(
             country = event.country,
         )
         offerRepository.insert(offer).let { persisted ->
-            offerPromotionLinker.linkPromosToOffer(persisted.it)
+            offerPromoLinker.linkPromosToOffer(persisted.it)
         }
     }
 
@@ -29,7 +29,7 @@ class DomainHandler(
             country = event.country,
         )
         promoRepository.insert(promo).let { persisted ->
-            offerPromotionLinker.linkOffersToPromo(persisted.it)
+            offerPromoLinker.linkOffersToPromo(persisted.it)
         }
     }
 

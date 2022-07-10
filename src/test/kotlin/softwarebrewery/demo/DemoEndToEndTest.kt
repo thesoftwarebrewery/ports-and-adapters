@@ -8,11 +8,10 @@ import org.springframework.context.annotation.*
 import org.springframework.test.context.*
 import softwarebrewery.demo.adapters.offer.*
 import softwarebrewery.demo.adapters.promo.*
-import softwarebrewery.demo.infra.jdbc.*
 import softwarebrewery.demo.infra.pubsub.*
 import java.time.Instant.*
 
-@ResetDatabase
+//@ResetDatabase
 @ActiveProfiles("it")
 @Import(PubSubTestConfig::class)
 @SpringBootTest(webEnvironment = NONE)
@@ -21,7 +20,7 @@ class DemoEndToEndTest(
     @Autowired val offerDomain: FakeOfferDomain,
 ) {
 
-//    @RepeatedTest(1000)
+    @RepeatedTest(1000)
     @Test
     fun `given existing offer when matching promo is activated then notifies offer promoted`() {
         val offer = anExternalOfferCreated()

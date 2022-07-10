@@ -14,7 +14,6 @@ import kotlin.time.Duration.Companion.seconds
 fun PubSubOperations.publishSync(topic: String, message: PubsubMessage, timeout: Duration = 3.seconds) {
     publish(topic, message).get(timeout.inWholeMilliseconds, MILLISECONDS)
     // todo: allow message handling to commit before next message to prevent missed links in concurrent tx
-    Thread.sleep(250)
 }
 
 fun PubSubOperations.assertReceived(

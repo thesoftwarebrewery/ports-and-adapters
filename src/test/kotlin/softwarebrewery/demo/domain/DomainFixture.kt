@@ -16,7 +16,7 @@ class DomainFixture {
     private val domainHandler = DomainHandler(
         offerRepository = offerRepository,
         promoRepository = promoRepository,
-        offerPromotionLinker = DirectOfferPromoLinker(
+        offerPromoLinker = DirectOfferPromoLinker(
             offerRepository = offerRepository,
             promoRepository = promoRepository,
             offerPromoListener = offerPromotionListener,
