@@ -13,20 +13,23 @@ class InMemOfferRepository(
 
     private val records = ConcurrentHashMap<OfferId, Offer>()
 
-    override fun insert(offer: Offer): Modified<Offer>? {
-        val current = records[offer.offerId]
+    override fun new(offerId: OfferId, productId: ProductId, country: Country) =
+        VersionedOffer(offerId, productId, country, clock())
 
-        if (current != null && current.publishedAt.isAfter(offer.publishedAt)) {
-            return null
-        }
-
+    override fun insert(offer: Offer): Modified<Offer> {
         val txTime = clock()
-        records[offer.offerId] = offer
-
-        return Modified(offer, txTime)
+        val inserted = VersionedOffer(
+            offerId = offer.offerId,
+            productId = offer.productId,
+            country = offer.country,
+            modifiedAt = txTime,
+        )
+        records[offer.offerId] = inserted
+        return Modified(inserted, txTime)
     }
 
-    override fun findByProductId(productId: ProductId) =
-        records.filterValues { it.productId == productId }.values
+    override fun update(offer: Offer): Modified<Offer> = throw UnsupportedOperationException()
+
+    override fun findByProductId(productId: ProductId) = records.filterValues { it.productId == productId }.values
 
 }

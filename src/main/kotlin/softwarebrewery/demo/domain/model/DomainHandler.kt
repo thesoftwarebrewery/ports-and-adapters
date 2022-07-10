@@ -20,14 +20,12 @@ class DomainHandler(
     )
 
     override fun handle(event: OfferCreated) {
-        offerRepository.insert(
-            Offer(
-                publishedAt = event.publishedAt,
-                offerId = event.offerId,
-                productId = event.productId,
-                country = event.country,
-            )
-        )?.let { offerPromotionLinker.linkPromosToOffer(it.it) }
+        val offer = offerRepository.new(
+            offerId = event.offerId,
+            productId = event.productId,
+            country = event.country,
+        )
+        offerRepository.insert(offer).let { persisted -> offerPromotionLinker.linkPromosToOffer(persisted.it) }
     }
 
     override fun handle(event: OfferDeleted): Unit = throw UnsupportedOperationException()
