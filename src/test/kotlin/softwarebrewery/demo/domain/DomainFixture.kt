@@ -4,22 +4,27 @@ import org.assertj.core.api.Assertions.*
 import softwarebrewery.demo.adapters.application.*
 import softwarebrewery.demo.domain.model.*
 import softwarebrewery.demo.domain.ports.*
+import java.time.*
 import kotlin.time.Duration.Companion.seconds
 
 class DomainFixture {
 
     private val clock = FakeClock()
     private val offerRepository = InMemOfferRepository(clock)
-    private val promotionRepository = InMemPromoRepository(clock)
+    private val promoRepository = InMemPromoRepository(clock)
     private val offerPromotionListener = InMemOfferPromoListener()
     private val domainHandler = DomainHandler(
         offerRepository = offerRepository,
-        promoRepository = promotionRepository,
-        offerPromoListener = offerPromotionListener,
-        clock = clock,
+        promoRepository = promoRepository,
+        offerPromotionLinker = DirectOfferPromoLinker(
+            offerRepository = offerRepository,
+            promoRepository = promoRepository,
+            offerPromoListener = offerPromotionListener,
+            clock = clock,
+        ),
     )
 
-    val time get() = clock()
+    val time get() : Instant = clock()
 
     fun handle(vararg messages: Any) = messages.forEach {
         clock.forward(1.seconds)

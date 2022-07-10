@@ -12,7 +12,7 @@ import org.springframework.test.context.*
     mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS,
     listeners = [ResetDatabaseTestListener::class],
 )
-annotation class ResetDbForEachTest
+annotation class ResetDatabase
 
 class ResetDatabaseTestListener : TestExecutionListener {
 

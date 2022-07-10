@@ -6,16 +6,8 @@ import softwarebrewery.demo.domain.ports.*
 class DomainHandler(
     private val offerRepository: OfferRepository,
     private val promoRepository: PromoRepository,
-    offerPromoListener: OfferPromoListener,
-    clock: Clock,
+    private val offerPromotionLinker: OfferPromoLinker,
 ) : DomainApi {
-
-    private val offerPromotionLinker = OfferPromotionLinker(
-        offerRepository = offerRepository,
-        promoRepository = promoRepository,
-        offerPromoListener = offerPromoListener,
-        clock = clock,
-    )
 
     override fun handle(event: OfferCreated) {
         val offer = offerRepository.new(

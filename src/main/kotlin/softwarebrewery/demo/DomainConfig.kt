@@ -20,14 +20,21 @@ class DomainConfig {
         promoRepository: PromoRepository,
         offerPromoListener: OfferPromoListener,
         clock: Clock,
-    ): DomainApi = TransactionalDomainHandler(
-        domainApi = DomainHandler(
+    ): DomainApi {
+        val offerPromotionLinker = DirectOfferPromoLinker(
             offerRepository = offerRepository,
             promoRepository = promoRepository,
             offerPromoListener = offerPromoListener,
             clock = clock,
         )
-    )
+        return TransactionalDomainHandler(
+            domainApi = DomainHandler(
+                offerRepository = offerRepository,
+                promoRepository = promoRepository,
+                offerPromotionLinker = offerPromotionLinker,
+            )
+        )
+    }
 
     @Transactional
     class TransactionalDomainHandler(domainApi: DomainApi) : DomainApi by domainApi

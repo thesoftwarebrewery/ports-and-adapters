@@ -4,21 +4,21 @@ import softwarebrewery.demo.domain.ports.*
 import softwarebrewery.demo.domain.ports.Clock
 import java.time.*
 
-class OfferPromotionLinker(
+class DirectOfferPromoLinker(
     private val offerRepository: OfferRepository,
     private val promoRepository: PromoRepository,
     private val offerPromoListener: OfferPromoListener,
     private val clock: Clock,
-) {
+) : OfferPromoLinker {
 
-    fun linkOffersToPromo(promo: Promo) {
+    override fun linkOffersToPromo(promo: Promo) {
         val appliedAt = clock()
         offerRepository.findByProductId(promo.productId)
             .mapNotNull { offer -> offerPromotedIfApplicable(promo, offer, appliedAt) }
             .forEach { offerPromoListener.handle(it) }
     }
 
-    fun linkPromosToOffer(offer: Offer) {
+    override fun linkPromosToOffer(offer: Offer) {
         val appliedAt = clock()
         promoRepository.findByProductId(offer.productId)
             .mapNotNull { promo -> offerPromotedIfApplicable(promo, offer, appliedAt) }

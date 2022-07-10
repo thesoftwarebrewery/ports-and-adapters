@@ -3,7 +3,7 @@ package softwarebrewery.demo.domain
 import org.junit.jupiter.api.*
 import softwarebrewery.demo.domain.model.*
 
-class FunctionalTest {
+class DomainFunctionalTest {
 
     private val domain = DomainFixture()
 
