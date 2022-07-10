@@ -8,8 +8,7 @@ import org.springframework.context.annotation.*
 import org.springframework.test.context.*
 import softwarebrewery.demo.adapters.offer.*
 import softwarebrewery.demo.adapters.promo.*
-import softwarebrewery.demo.domain.model.*
-import softwarebrewery.demo.infra.*
+import softwarebrewery.demo.infra.pubsub.*
 import java.time.Instant.*
 
 @ActiveProfiles("it")
@@ -22,21 +21,18 @@ class DemoEndToEndTest(
 
     @Test
     fun `given existing offer when matching promo is activated then notifies offer promoted`() {
-        val productId = namedRandom("product")
-        val offerId = namedRandom("offer")
-        val promotionId = namedRandom("promotionId")
-        val country = "NL"
-        offerDomain.createOffer(offerId = offerId, productId = productId, country = country)
-
-        promoDomain.createPromotion(promotionId = promotionId, productId = productId, country = country)
-
-        offerDomain.hasReceived(
-            OfferPromoted(
-                publishedAt = now(),
-                offerId = offerId,
-                promotionId = promotionId,
-                country = country,
-            )
+        val offer = anExternalOfferCreated()
+        val promotion = aPromotionMessage(productId = offer.productId!!, country = offer.country!!)
+        val offerPromoted = ExternalOfferPromoted(
+            publishedAt = now(),
+            offerId = offer.offerId!!,
+            promotionId = promotion.promotionId!!,
+            country = promotion.country!!,
         )
+        offerDomain.publishCreated(offer)
+
+        promoDomain.publishCreated(promotion)
+
+        offerDomain.hasReceived(offerPromoted)
     }
 }

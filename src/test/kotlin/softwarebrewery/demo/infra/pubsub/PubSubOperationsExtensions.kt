@@ -1,4 +1,4 @@
-package softwarebrewery.demo.infra
+package softwarebrewery.demo.infra.pubsub
 
 import com.google.cloud.spring.pubsub.core.*
 import com.google.protobuf.*

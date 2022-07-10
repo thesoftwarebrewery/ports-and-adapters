@@ -12,7 +12,7 @@ import org.springframework.boot.test.mock.mockito.*
 import org.springframework.context.annotation.*
 import org.springframework.test.context.*
 import softwarebrewery.demo.domain.*
-import softwarebrewery.demo.infra.*
+import softwarebrewery.demo.infra.pubsub.*
 import java.time.Instant.*
 
 @ActiveProfiles("it")

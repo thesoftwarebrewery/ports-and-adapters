@@ -7,36 +7,33 @@ import org.springframework.beans.factory.annotation.*
 import org.springframework.stereotype.*
 import softwarebrewery.demo.domain.model.*
 import softwarebrewery.demo.infra.*
+import softwarebrewery.demo.infra.pubsub.*
 import java.time.*
 
 @Component
 class FakeOfferDomain(
     @Value("\${pubsub.offer.offer-events.topic}") val offerEventsTopic: String,
-    @Value("\${pubsub.offer.offer-promo-events.subscription}") val offerPromoEventsSubscription: String,
+    @Value("\${pubsub.offer.offer-promo-events.subscription}") val offerPromotionsTopic: String,
     private val pubSub: PubSubOperations,
 ) {
 
-    fun createOffer(offerId: String, productId: String, country: String) {
-        val offerCreated = anExternalOfferCreated(offerId = offerId, productId = productId, country = country)
-
-        pubSub.publishSync(
-            offerEventsTopic, aPubSubMessage(
-                attributes = mapOf("event_type" to "OFFER_CREATED"),
-                data = offerCreated.toJson(),
-            )
+    fun publishCreated(message: ExternalOfferCreated) {
+        val pubSubMessage = aPubSubMessage(
+            attributes = mapOf("event_type" to "OFFER_CREATED"),
+            data = message.toJson(),
         )
+        pubSub.publishSync(offerEventsTopic, pubSubMessage)
     }
 
-    fun hasReceived(expected: OfferPromoted) {
-        pubSub.assertReceived(offerPromoEventsSubscription) {
+    fun hasReceived(message: ExternalOfferPromoted) =
+        pubSub.assertReceived(offerPromotionsTopic) {
             assertThat(it.attributesMap["event_type"]).isEqualTo("OFFER_PROMOTED")
 
             val actual = assertDoesNotThrow { it.data.deserializeJsonAs<OfferPromoted>() }
 
-            assertThat(actual.offerId).isEqualTo(expected.offerId)
-            assertThat(actual.country).isEqualTo(expected.country)
-            assertThat(actual.promotionId).isEqualTo(expected.promotionId)
+            assertThat(actual.offerId).isEqualTo(message.offerId)
+            assertThat(actual.country).isEqualTo(message.country)
+            assertThat(actual.promotionId).isEqualTo(message.promotionId)
             assertThat(actual.publishedAt).isBetween(Instant.now().minusSeconds(5), Instant.now())
         }
-    }
 }

@@ -1,4 +1,4 @@
-package softwarebrewery.demo.infra
+package softwarebrewery.demo.infra.pubsub
 
 import com.google.cloud.spring.pubsub.*
 import org.springframework.beans.factory.annotation.*

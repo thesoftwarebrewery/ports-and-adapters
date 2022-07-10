@@ -1,4 +1,4 @@
-package softwarebrewery.demo.infra
+package softwarebrewery.demo.infra.pubsub
 
 import com.google.cloud.spring.pubsub.*
 import com.google.pubsub.v1.*
@@ -8,7 +8,7 @@ private val log = KotlinLogging.logger { }
 
 fun Topic.simpleName(): String = name.substringAfterLast("/")
 
-fun Subscription.simpleName(): String = name.substringAfterLast("/")
+fun com.google.pubsub.v1.Subscription.simpleName(): String = name.substringAfterLast("/")
 
 fun PubSubAdmin.hasTopic(topic: String) = listTopics().any { it.simpleName() == topic }
 

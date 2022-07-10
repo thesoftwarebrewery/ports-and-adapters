@@ -2,7 +2,6 @@ package softwarebrewery.demo
 
 import com.google.api.gax.core.*
 import com.google.cloud.spring.pubsub.core.*
-import mu.*
 import org.springframework.context.*
 import org.springframework.context.annotation.*
 import org.springframework.jdbc.core.namedparam.*
@@ -10,8 +9,7 @@ import org.springframework.transaction.*
 import softwarebrewery.demo.infra.pubsub.*
 import java.time.*
 import java.time.Instant.*
-
-private val log = KotlinLogging.logger { }
+import kotlin.time.Duration.Companion.seconds
 
 @Configuration
 class InfraConfig {
@@ -33,23 +31,27 @@ class InfraConfig {
     }
 
     @Bean
-    fun outboxStorage(db: NamedParameterJdbcTemplate, txManager: PlatformTransactionManager): OutboxStorage =
+    fun outboxStorage(db: NamedParameterJdbcTemplate, txManager: PlatformTransactionManager) =
         JdbcOutboxStorage(db, txManager)
 
     @Bean
     fun pubSubOutbox(
         outboxStorage: OutboxStorage,
         eventPublisher: ApplicationEventPublisher,
-        publishMessage: PubSubPublisher
-    ) = TransactionalPubSubOutbox(
-        outboxStorage = outboxStorage,
-        eventPublisher = eventPublisher,
-        publishMessage = publishMessage,
-    )
+        publishMessage: PubSubPublisher,
+    ) = TransactionalPubSubOutbox(outboxStorage, eventPublisher, publishMessage)
 
     @Bean
-    fun pubSubPublisher(pubSubOps: PubSubOperations) = PubSubPublisher { topic, message ->
-        log.info { "publishing to '$topic' message '$message'" }
-        pubSubOps.publish(topic, message)
-    }
+    fun outboxRetryJob(outboxStorage: OutboxStorage, publishMessage: PubSubPublisher) =
+        PubSubOutboxRetryJob(
+            outboxStorage = outboxStorage,
+            publishMessage = publishMessage,
+            runInterval = 5.seconds,
+            maxMessagesPerBatch = 1000,
+            minMessageAge = 30.seconds,
+        )
+
+    @Bean
+    fun pubSubPublisher(pubSubOps: PubSubOperations) = PubSubPublisher(pubSubOps::publish)
+
 }
