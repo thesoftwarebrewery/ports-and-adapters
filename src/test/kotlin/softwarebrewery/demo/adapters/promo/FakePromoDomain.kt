@@ -11,7 +11,7 @@ class FakePromoDomain(
     private val pubSub: PubSubOperations,
 ) {
 
-    fun publishCreated(message: PromotionMessage) {
+    fun publishCreated(message: ExternalPromotionMessage) {
         val pubSubMessage = aPubSubMessage(
             attributes = mapOf("change_type" to "CREATE"),
             data = message.toJson(),

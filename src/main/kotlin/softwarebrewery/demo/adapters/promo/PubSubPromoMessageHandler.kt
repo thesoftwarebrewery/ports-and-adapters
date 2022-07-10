@@ -13,11 +13,11 @@ class PubSubPromoMessageHandler(
 ) : MessageHandler {
 
     override fun invoke(attributes: Map<String, String>, data: ByteBuffer) {
-        val promotionMessage = PromotionMessage.fromJsonBytes(data)
+        val externalPromotionMessage = ExternalPromotionMessage.fromJsonBytes(data)
 
         when (val changeType = attributes[CHANGE_TYPE]) {
-            CHANGE_TYPE_CREATE -> domainApi.handle(promotionMessage.toDomainPromotionActivated())
-            CHANGE_TYPE_DELETE -> domainApi.handle(promotionMessage.toDomainPromotionDeactivated())
+            CHANGE_TYPE_CREATE -> domainApi.handle(externalPromotionMessage.toDomainPromotionActivated())
+            CHANGE_TYPE_DELETE -> domainApi.handle(externalPromotionMessage.toDomainPromotionDeactivated())
             else -> throw UnsupportedOperationException(changeType)
         }
     }

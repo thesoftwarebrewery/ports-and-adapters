@@ -9,7 +9,7 @@ fun aPromotionMessage(
     promotionId: String = namedRandom("promotion"),
     productId: String = namedRandom("product"),
     country: String = setOf("BE", "NL").random(),
-) = PromotionMessage(
+) = ExternalPromotionMessage(
     timestampUtc = timestamp,
     promotionId = promotionId,
     productId = productId,

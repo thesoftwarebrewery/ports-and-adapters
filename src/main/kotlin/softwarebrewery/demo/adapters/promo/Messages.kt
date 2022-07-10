@@ -16,7 +16,7 @@ class MessageAttributes {
     }
 }
 
-data class PromotionMessage(
+data class ExternalPromotionMessage(
     val timestampUtc: Instant?,
     val promotionId: String?,
     val productId: String?,
@@ -31,7 +31,7 @@ data class PromotionMessage(
             .registerModule(JavaTimeModule())
             .disable(WRITE_DATES_AS_TIMESTAMPS)!!
 
-        fun fromJsonBytes(bytes: ByteBuffer): PromotionMessage = jackson.readValue(UTF_8.decode(bytes).toString())
+        fun fromJsonBytes(bytes: ByteBuffer): ExternalPromotionMessage = jackson.readValue(UTF_8.decode(bytes).toString())
 
     }
 }

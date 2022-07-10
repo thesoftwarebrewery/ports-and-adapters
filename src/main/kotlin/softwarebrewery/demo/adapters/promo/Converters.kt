@@ -2,7 +2,7 @@ package softwarebrewery.demo.adapters.promo
 
 import softwarebrewery.demo.domain.*
 
-fun PromotionMessage.toDomainPromotionActivated() =
+fun ExternalPromotionMessage.toDomainPromotionActivated() =
     PromotionActivated(
         publishedAt = this.timestampUtc!!,
         promotionId = this.promotionId!!,
@@ -10,7 +10,7 @@ fun PromotionMessage.toDomainPromotionActivated() =
         country = this.country!!,
     )
 
-fun PromotionMessage.toDomainPromotionDeactivated() =
+fun ExternalPromotionMessage.toDomainPromotionDeactivated() =
     PromotionDeactivated(
         publishedAt = this.timestampUtc!!,
         promotionId = this.promotionId!!,

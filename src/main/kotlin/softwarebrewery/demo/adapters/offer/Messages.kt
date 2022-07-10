@@ -30,9 +30,7 @@ data class ExternalOfferCreated(
     fun toJson(): String = jackson.writeValueAsString(this)
 
     companion object {
-
         fun fromJsonBytes(bytes: ByteBuffer): ExternalOfferCreated = jackson.readValue(UTF_8.decode(bytes).toString())
-
     }
 }
 
