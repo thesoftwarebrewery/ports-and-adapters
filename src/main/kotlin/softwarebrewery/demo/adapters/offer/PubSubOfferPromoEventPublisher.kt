@@ -33,7 +33,7 @@ class PubSubOfferPromoEventPublisher(
         )
     }
 
-    override fun handle(event: OfferUnPromoted) {
+    override fun handle(event: OfferDemoted) {
         throw UnsupportedOperationException()
     }
 }

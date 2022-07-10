@@ -4,7 +4,7 @@ import softwarebrewery.demo.*
 import java.time.*
 import java.time.Instant.*
 
-fun aPromotionMessage(
+fun anExternalPromotionMessage(
     timestamp: Instant = now(),
     promotionId: String = namedRandom("promotion"),
     productId: String = namedRandom("product"),

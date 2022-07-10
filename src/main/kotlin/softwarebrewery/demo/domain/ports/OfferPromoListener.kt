@@ -6,5 +6,5 @@ import softwarebrewery.demo.domain.model.*
 @SecondaryPort
 interface OfferPromoListener {
     fun handle(event: OfferPromoted)
-    fun handle(event: OfferUnPromoted)
+    fun handle(event: OfferDemoted)
 }

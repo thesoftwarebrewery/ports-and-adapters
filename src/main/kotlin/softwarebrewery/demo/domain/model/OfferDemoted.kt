@@ -4,7 +4,7 @@ import softwarebrewery.demo.domain.*
 import java.time.*
 
 @DomainEvent
-data class OfferUnPromoted(
+data class OfferDemoted(
     val publishedAt: Instant,
     val offerId: OfferId,
     val promotionId: PromotionId,

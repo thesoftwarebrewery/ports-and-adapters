@@ -22,7 +22,7 @@ class DemoEndToEndTest(
     @Test
     fun `given existing offer when matching promo is activated then notifies offer promoted`() {
         val offer = anExternalOfferCreated()
-        val promotion = aPromotionMessage(productId = offer.productId!!, country = offer.country!!)
+        val promotion = anExternalPromotionMessage(productId = offer.productId!!, country = offer.country!!)
         val offerPromoted = ExternalOfferPromoted(
             publishedAt = now(),
             offerId = offer.offerId!!,

@@ -8,16 +8,16 @@ import softwarebrewery.demo.domain.ports.*
 class InMemOfferPromoListener : OfferPromoListener {
 
     private val promoted = mutableListOf<OfferPromoted>()
-    private val demoted = mutableListOf<OfferUnPromoted>()
+    private val demoted = mutableListOf<OfferDemoted>()
 
     val offersPromoted get() : List<OfferPromoted> = promoted
-    val offersDemoted get() : List<OfferUnPromoted> = demoted
+    val offersDemoted get() : List<OfferDemoted> = demoted
 
     override fun handle(event: OfferPromoted) {
         promoted.add(event)
     }
 
-    override fun handle(event: OfferUnPromoted) {
+    override fun handle(event: OfferDemoted) {
         demoted.add(event)
     }
 }
