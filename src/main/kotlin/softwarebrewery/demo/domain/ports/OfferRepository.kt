@@ -5,6 +5,6 @@ import softwarebrewery.demo.domain.model.*
 
 @SecondaryPort
 interface OfferRepository {
-    fun saveOrUpdate(offer: Offer): Modified<Offer>?
+    fun insert(offer: Offer): Modified<Offer>?
     fun findByProductId(productId: ProductId): Collection<Offer>
 }

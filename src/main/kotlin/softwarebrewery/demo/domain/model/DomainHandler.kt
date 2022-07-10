@@ -20,7 +20,7 @@ class DomainHandler(
     )
 
     override fun handle(event: OfferCreated) {
-        offerRepository.saveOrUpdate(
+        offerRepository.insert(
             Offer(
                 publishedAt = event.publishedAt,
                 offerId = event.offerId,
@@ -33,7 +33,7 @@ class DomainHandler(
     override fun handle(event: OfferDeleted): Unit = throw UnsupportedOperationException()
 
     override fun handle(event: PromotionActivated) {
-        promotionRepository.saveOrUpdate(
+        promotionRepository.insert(
             Promotion(
                 publishedAt = event.publishedAt,
                 promotionId = event.promotionId,

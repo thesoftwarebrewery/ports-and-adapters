@@ -13,7 +13,7 @@ class InMemPromoRepository(
 
     private val records = ConcurrentHashMap<PromotionId, Promotion>()
 
-    override fun saveOrUpdate(promotion: Promotion): Modified<Promotion>? {
+    override fun insert(promotion: Promotion): Modified<Promotion>? {
         val current = records[promotion.promotionId]
 
         if (current != null && current.publishedAt.isAfter(promotion.publishedAt)) {

@@ -8,7 +8,7 @@ class JdbcOfferRepository(
     db: NamedParameterJdbcTemplate,
 ) : OfferRepository {
 
-    override fun saveOrUpdate(offer: Offer): Modified<Offer>? {
+    override fun insert(offer: Offer): Modified<Offer>? {
         TODO("Not yet implemented")
     }
 
