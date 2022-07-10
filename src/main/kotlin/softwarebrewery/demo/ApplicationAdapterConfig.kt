@@ -10,10 +10,10 @@ class ApplicationAdapterConfig {
 
     @Bean
     fun offerRepository(db: NamedParameterJdbcTemplate, clock: () -> Instant) =
-        JdbcOfferRepository(db, clock)
+        JdbcOfferRepo(db, clock)
 
     @Bean
     fun promotionRepository(db: NamedParameterJdbcTemplate, clock: () -> Instant) =
-        JdbcPromoRepository(db, clock)
+        JdbcPromoRepo(db, clock)
 
 }

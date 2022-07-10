@@ -4,7 +4,7 @@ import softwarebrewery.demo.domain.*
 import softwarebrewery.demo.domain.model.*
 
 @SecondaryPort
-interface OfferRepository {
+interface OfferRepo {
 
     fun new(offerId: OfferId, productId: ProductId, country: Country): Offer
 

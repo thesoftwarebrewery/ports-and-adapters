@@ -17,12 +17,12 @@ import kotlin.time.Duration.Companion.seconds
 @ActiveProfiles("it")
 @DataJdbcTest
 @AutoConfigureTestDatabase(replace = NONE)
-class JdbcOfferRepositoryIT(
+class JdbcOfferRepoIT(
     @Autowired private val db: NamedParameterJdbcTemplate,
 ) {
 
     private val clock = FakeClock()
-    private val repo = JdbcOfferRepository(db, clock)
+    private val repo = JdbcOfferRepo(db, clock)
 
     @Test
     fun `inserts a new offer`() {

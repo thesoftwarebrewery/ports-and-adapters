@@ -7,9 +7,9 @@ import java.time.*
 import java.util.concurrent.*
 
 @DrivenAdapter
-class InMemOfferRepository(
+class InMemOfferRepo(
     private val clock: () -> Instant,
-) : OfferRepository {
+) : OfferRepo {
 
     private val records = ConcurrentHashMap<OfferId, Offer>()
 

@@ -4,18 +4,18 @@ import softwarebrewery.demo.domain.*
 import softwarebrewery.demo.domain.ports.*
 
 class DomainHandler(
-    private val offerRepository: OfferRepository,
-    private val promoRepository: PromoRepository,
+    private val offerRepo: OfferRepo,
+    private val promoRepo: PromoRepo,
     private val offerPromoLinker: OfferPromoLinker,
 ) : DomainApi {
 
     override fun handle(event: OfferCreated) {
-        val offer = offerRepository.new(
+        val offer = offerRepo.new(
             offerId = event.offerId,
             productId = event.productId,
             country = event.country,
         )
-        offerRepository.insert(offer).let { persisted ->
+        offerRepo.insert(offer).let { persisted ->
             offerPromoLinker.linkPromosToOffer(persisted.it)
         }
     }
@@ -23,12 +23,12 @@ class DomainHandler(
     override fun handle(event: OfferDeleted): Unit = throw UnsupportedOperationException()
 
     override fun handle(event: PromotionActivated) {
-        val promo = promoRepository.new(
+        val promo = promoRepo.new(
             promotionId = event.promotionId,
             productId = event.productId,
             country = event.country,
         )
-        promoRepository.insert(promo).let { persisted ->
+        promoRepo.insert(promo).let { persisted ->
             offerPromoLinker.linkOffersToPromo(persisted.it)
         }
     }

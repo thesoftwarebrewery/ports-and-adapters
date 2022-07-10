@@ -19,15 +19,15 @@ class DomainConfig {
 
     @Bean
     fun domainApi(
-        offerRepository: OfferRepository,
-        promoRepository: PromoRepository,
+        offerRepo: OfferRepo,
+        promoRepo: PromoRepo,
         offerPromoListener: OfferPromoListener,
         offerPromoLinker: OfferPromoLinker,
     ): DomainApi {
         return TransactionalDomainHandler(
             domainApi = DomainHandler(
-                offerRepository = offerRepository,
-                promoRepository = promoRepository,
+                offerRepo = offerRepo,
+                promoRepo = promoRepo,
                 offerPromoLinker = offerPromoLinker,
             )
         )
@@ -36,8 +36,8 @@ class DomainConfig {
     @Bean
     fun offerPromoLinker(
         db: NamedParameterJdbcTemplate,
-        offerRepository: OfferRepository,
-        promoRepository: PromoRepository,
+        offerRepo: OfferRepo,
+        promoRepo: PromoRepo,
         offerPromoListener: OfferPromoListener,
         clock: Clock,
         eventPublisher: ApplicationEventPublisher,
@@ -45,8 +45,8 @@ class DomainConfig {
         linkRequestRepo = JdbcLinkRequestRepo(db),
         eventPublisher = eventPublisher,
         offerPromoLinker = DirectOfferPromoLinker(
-            offerRepository = offerRepository,
-            promoRepository = promoRepository,
+            offerRepo = offerRepo,
+            promoRepo = promoRepo,
             offerPromoListener = offerPromoListener,
             clock = clock,
         ),

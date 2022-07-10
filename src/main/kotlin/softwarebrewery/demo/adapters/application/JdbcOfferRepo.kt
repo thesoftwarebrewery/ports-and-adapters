@@ -8,24 +8,24 @@ import softwarebrewery.demo.domain.ports.*
 import java.sql.*
 import java.time.*
 
-class JdbcPromoRepository(
+class JdbcOfferRepo(
     private val db: NamedParameterJdbcTemplate,
     private val clock: () -> Instant,
-) : PromoRepository {
+) : OfferRepo {
 
-    override fun new(promotionId: PromotionId, productId: ProductId, country: Country) =
-        VersionedPromo(promotionId, productId, country, modifiedAt = null)
+    override fun new(offerId: OfferId, productId: ProductId, country: Country) =
+        VersionedOffer(offerId, productId, country, modifiedAt = null)
 
-    override fun insert(promo: Promo): Modified<Promo> {
-        val versioned = promo as VersionedPromo
+    override fun insert(offer: Offer): Modified<Offer> {
+        val versioned = offer as VersionedOffer
 
         val query = """
-            insert into promos (promotion_id, product_id, country, created_at, modified_at)
-            values (:promotion_id, :product_id, :country, :created_at, :modified_at)
+            insert into offers (offer_id, product_id, country, created_at, modified_at)
+            values (:offer_id, :product_id, :country, :created_at, :modified_at)
         """.trimIndent()
         val txTime = clock()
         val params = mapOf(
-            "promotion_id" to versioned.promotionId,
+            "offer_id" to versioned.offerId,
             "product_id" to versioned.productId,
             "country" to versioned.country,
             "created_at" to Timestamp.from(txTime),
@@ -37,12 +37,14 @@ class JdbcPromoRepository(
         return Modified(it = versioned.copy(modifiedAt = txTime), at = txTime)
     }
 
-    override fun update(promo: Promo): Modified<Promo> {
-        val versioned = promo as VersionedPromo
+    override fun update(offer: Offer): Modified<Offer> {
+        val versioned = offer as VersionedOffer
 
         val query = """
-            update offers
-                set modified_at = :old_modified_at
+            update offers set
+                country = :country,
+                product_id = :product_id,
+                modified_at = :new_modified_at
             where
                 offer_id = :offer_id
                 and modified_at = :old_modified_at
@@ -50,22 +52,24 @@ class JdbcPromoRepository(
         """.trimIndent()
         val txTime = clock()
         val params = mapOf(
-            "promotion_id" to versioned.promotionId,
-            "old_modified_at" to versioned.modifiedAt!!,
-            "new_modified_at" to txTime,
+            "offer_id" to versioned.offerId,
+            "country" to versioned.country,
+            "product_id" to versioned.productId,
+            "old_modified_at" to Timestamp.from(versioned.modifiedAt!!),
+            "new_modified_at" to Timestamp.from(txTime),
         )
 
         val affected = db.update(query, params)
         if (affected != 1) {
-            throw OptimisticLockingFailureException("promos")
+            throw OptimisticLockingFailureException("offers")
         }
         return Modified(it = versioned.copy(modifiedAt = txTime), at = txTime)
     }
 
-    override fun findByProductId(productId: ProductId): Collection<Promo> {
+    override fun findByProductId(productId: ProductId): Collection<Offer> {
         val query = """
-            select promotion_id, product_id, country, created_at, modified_at
-            from promos
+            select offer_id, product_id, country, created_at, modified_at
+            from offers
             where product_id = :product_id 
         """.trimIndent()
         val params = mapOf("product_id" to productId)
@@ -75,8 +79,8 @@ class JdbcPromoRepository(
     companion object {
 
         private val offerMapper = RowMapper { rs, _ ->
-            VersionedPromo(
-                promotionId = rs.getString("promotion_id"),
+            VersionedOffer(
+                offerId = rs.getString("offer_id"),
                 productId = rs.getString("product_id"),
                 country = rs.getString("country"),
                 modifiedAt = rs.getTimestamp("modified_at").toInstant(),

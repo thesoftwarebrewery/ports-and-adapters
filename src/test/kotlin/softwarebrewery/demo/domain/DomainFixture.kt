@@ -10,15 +10,15 @@ import kotlin.time.Duration.Companion.seconds
 class DomainFixture {
 
     private val clock = FakeClock()
-    private val offerRepository = InMemOfferRepository(clock)
-    private val promoRepository = InMemPromoRepository(clock)
+    private val offerRepository = InMemOfferRepo(clock)
+    private val promoRepository = InMemPromoRepo(clock)
     private val offerPromotionListener = InMemOfferPromoListener()
     private val domainHandler = DomainHandler(
-        offerRepository = offerRepository,
-        promoRepository = promoRepository,
+        offerRepo = offerRepository,
+        promoRepo = promoRepository,
         offerPromoLinker = DirectOfferPromoLinker(
-            offerRepository = offerRepository,
-            promoRepository = promoRepository,
+            offerRepo = offerRepository,
+            promoRepo = promoRepository,
             offerPromoListener = offerPromotionListener,
             clock = clock,
         ),
