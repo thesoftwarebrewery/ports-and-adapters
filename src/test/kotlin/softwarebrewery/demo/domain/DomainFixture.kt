@@ -14,7 +14,7 @@ class DomainFixture {
     private val offerPromotionListener = InMemOfferPromoListener()
     private val domainHandler = DomainHandler(
         offerRepository = offerRepository,
-        promotionRepository = promotionRepository,
+        promoRepository = promotionRepository,
         offerPromoListener = offerPromotionListener,
         clock = clock,
     )

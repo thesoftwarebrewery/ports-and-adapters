@@ -1,7 +1,7 @@
 package softwarebrewery.demo
 
 import org.springframework.context.annotation.*
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
+import org.springframework.jdbc.core.namedparam.*
 import softwarebrewery.demo.adapters.application.*
 import java.time.*
 
@@ -13,6 +13,7 @@ class ApplicationAdapterConfig {
         JdbcOfferRepository(db, clock)
 
     @Bean
-    fun promotionRepository(clock: () -> Instant) = InMemPromoRepository(clock)
+    fun promotionRepository(db: NamedParameterJdbcTemplate, clock: () -> Instant) =
+        JdbcPromoRepository(db, clock)
 
 }

@@ -9,22 +9,26 @@ import java.util.concurrent.*
 @DrivenAdapter
 class InMemPromoRepository(
     private val clock: () -> Instant,
-) : PromotionRepository {
+) : PromoRepository {
 
-    private val records = ConcurrentHashMap<PromotionId, Promotion>()
+    private val records = ConcurrentHashMap<PromotionId, Promo>()
 
-    override fun insert(promotion: Promotion): Modified<Promotion>? {
-        val current = records[promotion.promotionId]
+    override fun new(promotionId: PromotionId, productId: ProductId, country: Country) =
+        VersionedPromo(promotionId, productId, country, modifiedAt = null)
 
-        if (current != null && current.publishedAt.isAfter(promotion.publishedAt)) {
-            return null
-        }
-
+    override fun insert(promo: Promo): Modified<Promo> {
         val txTime = clock()
-        records[promotion.promotionId] = promotion
-
-        return Modified(promotion, txTime)
+        val inserted = VersionedPromo(
+            promotionId = promo.promotionId,
+            productId = promo.productId,
+            country = promo.country,
+            modifiedAt = txTime,
+        )
+        records[promo.promotionId] = inserted
+        return Modified(inserted, txTime)
     }
+
+    override fun update(promo: Promo): Modified<Promo> = throw UnsupportedOperationException()
 
     override fun findByProductId(productId: ProductId) =
         records.filterValues { p -> p.productId == productId }.values

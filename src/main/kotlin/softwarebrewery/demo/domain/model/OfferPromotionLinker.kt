@@ -6,12 +6,12 @@ import java.time.*
 
 class OfferPromotionLinker(
     private val offerRepository: OfferRepository,
-    private val promotionRepository: PromotionRepository,
+    private val promoRepository: PromoRepository,
     private val offerPromoListener: OfferPromoListener,
     private val clock: Clock,
 ) {
 
-    fun linkOffersToPromo(promo: Promotion) {
+    fun linkOffersToPromo(promo: Promo) {
         val appliedAt = clock()
         offerRepository.findByProductId(promo.productId)
             .mapNotNull { offer -> offerPromotedIfApplicable(promo, offer, appliedAt) }
@@ -20,12 +20,12 @@ class OfferPromotionLinker(
 
     fun linkPromosToOffer(offer: Offer) {
         val appliedAt = clock()
-        promotionRepository.findByProductId(offer.productId)
+        promoRepository.findByProductId(offer.productId)
             .mapNotNull { promo -> offerPromotedIfApplicable(promo, offer, appliedAt) }
             .forEach { offerPromoListener.handle(it) }
     }
 
-    private fun offerPromotedIfApplicable(promo: Promotion, offer: Offer, appliedAt: Instant): OfferPromoted? =
+    private fun offerPromotedIfApplicable(promo: Promo, offer: Offer, appliedAt: Instant): OfferPromoted? =
         if (!promo.appliesTo(offer)) null
         else OfferPromoted(
             publishedAt = appliedAt,

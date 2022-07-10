@@ -17,13 +17,13 @@ class DomainConfig {
     @Bean
     fun domainApi(
         offerRepository: OfferRepository,
-        promotionRepository: PromotionRepository,
+        promoRepository: PromoRepository,
         offerPromoListener: OfferPromoListener,
         clock: Clock,
     ): DomainApi = TransactionalDomainHandler(
         domainApi = DomainHandler(
             offerRepository = offerRepository,
-            promotionRepository = promotionRepository,
+            promoRepository = promoRepository,
             offerPromoListener = offerPromoListener,
             clock = clock,
         )
