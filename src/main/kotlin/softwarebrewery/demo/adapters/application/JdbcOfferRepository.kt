@@ -41,8 +41,10 @@ class JdbcOfferRepository(
         val versioned = offer as VersionedOffer
 
         val query = """
-            update offers
-                set modified_at = :old_modified_at
+            update offers set
+                country = :country,
+                product_id = :product_id,
+                modified_at = :new_modified_at
             where
                 offer_id = :offer_id
                 and modified_at = :old_modified_at
@@ -51,8 +53,10 @@ class JdbcOfferRepository(
         val txTime = clock()
         val params = mapOf(
             "offer_id" to versioned.offerId,
-            "old_modified_at" to versioned.modifiedAt!!,
-            "new_modified_at" to txTime,
+            "country" to versioned.country,
+            "product_id" to versioned.productId,
+            "old_modified_at" to Timestamp.from(versioned.modifiedAt!!),
+            "new_modified_at" to Timestamp.from(txTime),
         )
 
         val affected = db.update(query, params)

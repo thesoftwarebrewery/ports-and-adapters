@@ -9,5 +9,9 @@ data class VersionedOffer(
     override val country: Country,
     val modifiedAt: Instant?,
 ) : Offer {
-    fun isNew() = modifiedAt == null
+    override fun clone(
+        offerId: OfferId,
+        productId: ProductId,
+        country: Country
+    ): Offer = copy(offerId = offerId, productId = productId, country = country)
 }

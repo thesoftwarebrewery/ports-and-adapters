@@ -8,9 +8,11 @@ import org.springframework.context.annotation.*
 import org.springframework.test.context.*
 import softwarebrewery.demo.adapters.offer.*
 import softwarebrewery.demo.adapters.promo.*
+import softwarebrewery.demo.infra.jdbc.*
 import softwarebrewery.demo.infra.pubsub.*
 import java.time.Instant.*
 
+@ResetDbForEachTest
 @ActiveProfiles("it")
 @Import(PubSubTestConfig::class)
 @SpringBootTest(webEnvironment = NONE)
