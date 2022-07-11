@@ -14,5 +14,8 @@ class PromoAdapterConfig {
         @Value("\${pubsub.promo.promo-events.subscription}") subscription: String,
         subscribe: NewPubSubSubscriber,
         domainApi: DomainApi,
-    ) = subscribe(subscription, PubSubPromoMessageHandler(domainApi))
+    ): PubSubSubscriber = subscribe(
+        subscription = subscription,
+        handler = PubSubPromoMessageHandler(domainApi),
+    )
 }

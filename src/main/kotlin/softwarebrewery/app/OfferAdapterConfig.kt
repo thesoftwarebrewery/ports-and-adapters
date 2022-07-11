@@ -15,7 +15,10 @@ class OfferAdapterConfig {
         @Value("\${pubsub.offer.offer-events.subscription}") subscription: String,
         subscribe: NewPubSubSubscriber,
         domainApi: DomainApi,
-    ) = subscribe(subscription, PubSubOfferEventSubscriber(domainApi))
+    ): PubSubSubscriber = subscribe(
+        subscription = subscription,
+        handler = PubSubOfferEventSubscriber(domainApi),
+    )
 
     @Bean
     fun offerPromoEventPublisher(
