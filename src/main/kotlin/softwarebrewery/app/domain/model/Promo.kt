@@ -1,7 +1,5 @@
 package softwarebrewery.app.domain.model
 
-import java.time.*
-
 typealias PromotionId = String
 
 interface Promo {
@@ -9,13 +7,6 @@ interface Promo {
     val productId: ProductId
     val country: Country
 }
-
-data class VersionedPromo(
-    override val promotionId: PromotionId,
-    override val productId: ProductId,
-    override val country: Country,
-    val modifiedAt: Instant?,
-) : Promo
 
 fun Promo.appliesTo(offer: Offer) =
     productId == offer.productId

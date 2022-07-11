@@ -16,7 +16,7 @@ class DomainHandler(
             country = event.country,
         )
         offerRepo.insert(offer).let { persisted ->
-            offerPromoLinker.linkPromosToOffer(persisted.it)
+            offerPromoLinker.linkPromosToOffer(offer = persisted.it)
         }
     }
 
@@ -29,7 +29,7 @@ class DomainHandler(
             country = event.country,
         )
         promoRepo.insert(promo).let { persisted ->
-            offerPromoLinker.linkOffersToPromo(persisted.it)
+            offerPromoLinker.linkOffersToPromo(promo = persisted.it)
         }
     }
 

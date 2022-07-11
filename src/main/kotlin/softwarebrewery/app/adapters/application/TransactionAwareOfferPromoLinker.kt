@@ -5,10 +5,13 @@ import org.springframework.transaction.annotation.*
 import org.springframework.transaction.annotation.Propagation.*
 import org.springframework.transaction.event.*
 import org.springframework.transaction.event.TransactionPhase.*
-import softwarebrewery.app.adapters.application.JdbcLinkRequestRepo.*
+import softwarebrewery.app.adapters.application.LinkTrigger.*
+import softwarebrewery.app.domain.*
 import softwarebrewery.app.domain.model.*
 import softwarebrewery.app.domain.ports.*
 
+@DrivenAdapter  // activated by domain logic to fulfill OfferPromoLinker role
+@DrivingAdapter // activates domain logic of OfferPromoLinker
 @Transactional
 class TransactionAwareOfferPromoLinker(
     private val linkRequestRepo: JdbcLinkRequestRepo,
@@ -17,12 +20,12 @@ class TransactionAwareOfferPromoLinker(
 ) : OfferPromoLinker {
 
     override fun linkPromosToOffer(offer: Offer) {
-        linkRequestRepo.insert(LinkTrigger.Offer, offer.offerId)
+        linkRequestRepo.insert(OFFER, offer.offerId)
         eventPublisher.publishEvent(LinkingRequested(offer))
     }
 
     override fun linkOffersToPromo(promo: Promo) {
-        linkRequestRepo.insert(LinkTrigger.Promo, promo.promotionId)
+        linkRequestRepo.insert(PROMO, promo.promotionId)
         eventPublisher.publishEvent(LinkingRequested(promo))
     }
 
@@ -32,11 +35,11 @@ class TransactionAwareOfferPromoLinker(
         when (val trigger = linkingRequested.trigger) {
             is Offer -> {
                 offerPromoLinker.linkPromosToOffer(trigger)
-                linkRequestRepo.remove(LinkTrigger.Offer, trigger.offerId)
+                linkRequestRepo.remove(OFFER, trigger.offerId)
             }
             is Promo -> {
                 offerPromoLinker.linkOffersToPromo(trigger)
-                linkRequestRepo.remove(LinkTrigger.Promo, trigger.promotionId)
+                linkRequestRepo.remove(PROMO, trigger.promotionId)
             }
         }
     }

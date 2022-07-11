@@ -2,11 +2,11 @@ package softwarebrewery.app.adapters.application
 
 import org.springframework.jdbc.core.namedparam.*
 
+enum class LinkTrigger { OFFER, PROMO }
+
 class JdbcLinkRequestRepo(
     private val db: NamedParameterJdbcTemplate,
 ) {
-
-    enum class LinkTrigger { Offer, Promo }
 
     fun insert(trigger: LinkTrigger, key: String) {
         val query = "insert into link_requests (trigger, key) values (:trigger, :key)"

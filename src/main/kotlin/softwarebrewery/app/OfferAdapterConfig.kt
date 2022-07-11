@@ -21,7 +21,7 @@ class OfferAdapterConfig {
     fun offerPromoEventPublisher(
         @Value("\${pubsub.offer.offer-promo-events.topic}") topic: String,
         pubSubOutbox: PubSubOutbox,
-    ): OfferPromoListener = PubSubOfferPromoEventPublisher(
+    ): OfferPromoAnnouncer = PubSubOfferPromoEventPublisher(
         topic = topic,
         pubSubOutbox = pubSubOutbox,
     )

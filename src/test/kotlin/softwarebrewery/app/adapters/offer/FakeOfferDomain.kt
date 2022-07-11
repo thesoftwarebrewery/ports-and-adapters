@@ -5,7 +5,6 @@ import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.stereotype.*
-import softwarebrewery.app.domain.model.*
 import softwarebrewery.app.infra.*
 import softwarebrewery.app.infra.pubsub.*
 import java.time.*
@@ -29,7 +28,7 @@ class FakeOfferDomain(
         pubSub.assertReceived(offerPromotionsTopic) {
             assertThat(it.attributesMap["event_type"]).isEqualTo("OFFER_PROMOTED")
 
-            val actual = assertDoesNotThrow { it.data.deserializeJsonAs<OfferPromoted>() }
+            val actual = assertDoesNotThrow { it.data.deserializeJsonAs<ExternalOfferPromoted>() }
 
             assertThat(actual.offerId).isEqualTo(message.offerId)
             assertThat(actual.country).isEqualTo(message.country)

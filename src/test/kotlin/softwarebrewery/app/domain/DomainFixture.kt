@@ -12,14 +12,14 @@ class DomainFixture {
     private val clock = FakeClock()
     private val offerRepository = InMemOfferRepo(clock)
     private val promoRepository = InMemPromoRepo(clock)
-    private val offerPromotionListener = InMemOfferPromoListener()
+    private val offerPromoAnnouncer = InMemOfferPromoAnnouncer()
     private val domainHandler = DomainHandler(
         offerRepo = offerRepository,
         promoRepo = promoRepository,
         offerPromoLinker = DirectOfferPromoLinker(
             offerRepo = offerRepository,
             promoRepo = promoRepository,
-            offerPromoListener = offerPromotionListener,
+            offerPromoAnnouncer = offerPromoAnnouncer,
             clock = clock,
         ),
     )
@@ -40,11 +40,11 @@ class DomainFixture {
     }
 
     fun assertOffersPromoted(vararg events: OfferPromoted) {
-        assertThat(offerPromotionListener.offersPromoted).containsExactly(*events)
+        assertThat(offerPromoAnnouncer.offersPromoted).containsExactly(*events)
     }
 
-    fun assertNoOffersPromoted() = assertThat(offerPromotionListener.offersPromoted).isEmpty()
+    fun assertNoOffersPromoted() = assertThat(offerPromoAnnouncer.offersPromoted).isEmpty()
 
-    fun assertNoOffersDemoted() = assertThat(offerPromotionListener.offersDemoted).isEmpty()
+    fun assertNoOffersDemoted() = assertThat(offerPromoAnnouncer.offersDemoted).isEmpty()
 
 }
