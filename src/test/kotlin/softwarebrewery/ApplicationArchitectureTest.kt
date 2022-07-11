@@ -1,6 +1,6 @@
 package softwarebrewery
 
-import com.tngtech.archunit.core.importer.*
+import com.tngtech.archunit.core.importer.ImportOption.*
 import com.tngtech.archunit.junit.*
 import com.tngtech.archunit.lang.*
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.*
@@ -9,7 +9,7 @@ import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.*
 
 @AnalyzeClasses(
     packagesOf = [ApplicationArchitectureTest::class],
-    importOptions = [ImportOption.DoNotIncludeTests::class],
+    importOptions = [DoNotIncludeTests::class]
 )
 class ApplicationArchitectureTest {
 
