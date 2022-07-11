@@ -1,4 +1,4 @@
-package softwarebrewery.app.infra.pubsub
+package softwarebrewery.infra.pubsub
 
 import com.fasterxml.jackson.module.kotlin.*
 import com.google.protobuf.*
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Propagation.*
 import org.springframework.transaction.event.*
 import org.springframework.transaction.event.TransactionPhase.*
 import org.springframework.transaction.support.*
-import softwarebrewery.app.infra.pubsub.MessageProcessingResult.*
+import softwarebrewery.infra.pubsub.MessageProcessingResult.*
 import java.nio.*
 import java.time.*
 import java.time.Instant.*

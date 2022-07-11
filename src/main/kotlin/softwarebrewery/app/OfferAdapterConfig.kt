@@ -5,7 +5,7 @@ import org.springframework.context.annotation.*
 import softwarebrewery.app.adapters.offer.*
 import softwarebrewery.app.domain.*
 import softwarebrewery.app.domain.ports.*
-import softwarebrewery.app.infra.pubsub.*
+import softwarebrewery.infra.pubsub.*
 
 @Configuration
 class OfferAdapterConfig {

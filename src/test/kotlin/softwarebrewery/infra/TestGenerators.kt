@@ -1,6 +1,4 @@
-package softwarebrewery.app.infra
-
-import kotlin.random.*
+package softwarebrewery.infra
 
 fun namedRandom(prefix: String, length: Int = 5) =
     prefix + "-" + randomString(length)
@@ -11,5 +9,3 @@ fun randomString(length: Int = 5): String {
         .map { chars.random() }
         .joinToString("")
 }
-
-fun randomInt() = Random.nextInt(1)

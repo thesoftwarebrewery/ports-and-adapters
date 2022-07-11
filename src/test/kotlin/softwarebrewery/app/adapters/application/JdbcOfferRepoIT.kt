@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.*
 import org.springframework.jdbc.core.namedparam.*
 import org.springframework.test.context.*
 import softwarebrewery.app.domain.ports.*
-import softwarebrewery.app.infra.*
+import softwarebrewery.infra.*
 import java.sql.*
 import kotlin.time.Duration.Companion.seconds
 

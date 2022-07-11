@@ -6,7 +6,7 @@ import org.springframework.context.*
 import org.springframework.context.annotation.*
 import org.springframework.jdbc.core.namedparam.*
 import org.springframework.transaction.*
-import softwarebrewery.app.infra.pubsub.*
+import softwarebrewery.infra.pubsub.*
 import java.time.*
 import java.time.Instant.*
 import kotlin.time.Duration.Companion.seconds

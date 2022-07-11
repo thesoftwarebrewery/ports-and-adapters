@@ -4,7 +4,7 @@ import softwarebrewery.app.adapters.promo.MessageAttributes.Companion.CHANGE_TYP
 import softwarebrewery.app.adapters.promo.MessageAttributes.Companion.CHANGE_TYPE_CREATE
 import softwarebrewery.app.adapters.promo.MessageAttributes.Companion.CHANGE_TYPE_DELETE
 import softwarebrewery.app.domain.*
-import softwarebrewery.app.infra.pubsub.*
+import softwarebrewery.infra.pubsub.*
 import java.nio.*
 
 @DrivingAdapter

@@ -1,11 +1,11 @@
-package softwarebrewery.app.infra.pubsub
+package softwarebrewery.infra.pubsub
 
 import com.google.cloud.pubsub.v1.*
 import com.google.cloud.spring.pubsub.core.subscriber.*
 import com.google.cloud.spring.pubsub.support.*
 import mu.*
 import org.springframework.context.*
-import softwarebrewery.app.infra.pubsub.PubSubSubscriber.*
+import softwarebrewery.infra.pubsub.PubSubSubscriber.*
 import java.nio.*
 import java.util.concurrent.TimeUnit.*
 

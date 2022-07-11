@@ -6,8 +6,8 @@ import softwarebrewery.app.adapters.offer.MessageAttributes.Companion.EVENT_TYPE
 import softwarebrewery.app.domain.*
 import softwarebrewery.app.domain.model.*
 import softwarebrewery.app.domain.ports.*
-import softwarebrewery.app.infra.*
-import softwarebrewery.app.infra.pubsub.*
+import softwarebrewery.infra.*
+import softwarebrewery.infra.pubsub.*
 import java.nio.*
 
 @DrivenAdapter

@@ -1,4 +1,4 @@
-package softwarebrewery.app.infra.jdbc
+package softwarebrewery.infra.jdbc
 
 import mu.*
 import org.springframework.beans.factory.annotation.*

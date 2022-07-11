@@ -1,8 +1,9 @@
-package softwarebrewery.app.infra.pubsub
+package softwarebrewery.app
 
 import com.google.cloud.spring.pubsub.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.boot.test.context.*
+import softwarebrewery.infra.pubsub.*
 import javax.annotation.*
 
 @TestConfiguration

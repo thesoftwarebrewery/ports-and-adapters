@@ -3,7 +3,7 @@ package softwarebrewery.app.adapters.promo
 import com.google.cloud.spring.pubsub.core.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.stereotype.*
-import softwarebrewery.app.infra.pubsub.*
+import softwarebrewery.infra.pubsub.*
 
 @Component
 class FakePromoDomain(

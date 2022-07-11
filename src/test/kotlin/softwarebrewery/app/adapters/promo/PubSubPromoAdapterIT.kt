@@ -11,8 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.*
 import org.springframework.boot.test.mock.mockito.*
 import org.springframework.context.annotation.*
 import org.springframework.test.context.*
+import softwarebrewery.app.*
 import softwarebrewery.app.domain.*
-import softwarebrewery.app.infra.pubsub.*
+import softwarebrewery.infra.pubsub.*
 import java.time.Instant.*
 
 @ActiveProfiles("it")

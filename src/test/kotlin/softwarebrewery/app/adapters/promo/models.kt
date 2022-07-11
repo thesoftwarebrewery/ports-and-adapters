@@ -1,6 +1,6 @@
 package softwarebrewery.app.adapters.promo
 
-import softwarebrewery.app.infra.*
+import softwarebrewery.infra.*
 import java.time.*
 import java.time.Instant.*
 

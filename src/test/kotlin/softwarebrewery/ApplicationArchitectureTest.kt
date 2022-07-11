@@ -1,4 +1,4 @@
-package softwarebrewery.app
+package softwarebrewery
 
 import com.tngtech.archunit.core.importer.*
 import com.tngtech.archunit.junit.*
@@ -24,7 +24,7 @@ class ApplicationArchitectureTest {
                 // don't want this
                 // "org.springframework.transaction.annotation",
             )
-            .because("domain layer should be ignorant of technical implementation details")
+            .because("domain layer must be ignorant of technical implementation details")
 
     @ArchTest
     val `domain layer ports only depend on domain model`: ArchRule =
@@ -46,11 +46,9 @@ class ApplicationArchitectureTest {
     @ArchTest
     val `infra is independent from application specific code`: ArchRule =
         noClasses()
-            .that().resideInAPackage("..app.infra..")
+            .that().resideInAPackage("softwarebrewery.infra..")
             .should().accessClassesThat().resideInAnyPackage(
-                "..app.adapters..",
-                "..app.domain..",
-                "..app",
+                "softwarebrewery.app..",
             )
             .because("decoupling infra from application specifics makes them portable/reusable cross applications")
 

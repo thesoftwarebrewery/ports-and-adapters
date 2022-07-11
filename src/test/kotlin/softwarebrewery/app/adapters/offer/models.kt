@@ -1,10 +1,11 @@
 package softwarebrewery.app.adapters.offer
 
-import softwarebrewery.app.infra.*
+import softwarebrewery.infra.*
 import java.time.*
+import java.time.Instant.*
 
 fun anExternalOfferCreated(
-    createdAt: Instant = Instant.now(),
+    createdAt: Instant = now(),
     offerId: String = namedRandom("offer"),
     productId: String = namedRandom("product"),
     country: String = Country.values().random().name,

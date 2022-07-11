@@ -1,4 +1,4 @@
-package softwarebrewery.app.infra
+package softwarebrewery.infra
 
 import java.util.UUID.*
 

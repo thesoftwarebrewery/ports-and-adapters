@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.*
 import org.springframework.context.annotation.*
 import softwarebrewery.app.adapters.promo.*
 import softwarebrewery.app.domain.*
-import softwarebrewery.app.infra.pubsub.*
+import softwarebrewery.infra.pubsub.*
 
 @Configuration
 class PromoAdapterConfig {

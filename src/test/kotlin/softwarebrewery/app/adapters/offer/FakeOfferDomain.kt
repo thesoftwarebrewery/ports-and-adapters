@@ -5,14 +5,14 @@ import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.stereotype.*
-import softwarebrewery.app.infra.json.*
-import softwarebrewery.app.infra.pubsub.*
+import softwarebrewery.infra.json.*
+import softwarebrewery.infra.pubsub.*
 import java.time.Instant.*
 
 @Component
 class FakeOfferDomain(
-    @Value("\${pubsub.offer.offer-events.topic}") val offerEventsTopic: String,
-    @Value("\${pubsub.offer.offer-promo-events.subscription}") val offerPromotionsTopic: String,
+    @Value("\${pubsub.offer.offer-events.topic}") val offerTopic: String,
+    @Value("\${pubsub.offer.offer-promo-events.subscription}") val offerPromoTopic: String,
     private val pubSub: PubSubOperations,
 ) {
 
@@ -21,11 +21,11 @@ class FakeOfferDomain(
             attributes = mapOf("event_type" to "OFFER_CREATED"),
             data = message.toJson(),
         )
-        pubSub.publishSync(offerEventsTopic, pubSubMessage)
+        pubSub.publishSync(offerTopic, pubSubMessage)
     }
 
     fun hasReceived(message: ExternalOfferPromoted) =
-        pubSub.assertReceived(offerPromotionsTopic) {
+        pubSub.assertReceived(offerPromoTopic) {
             assertThat(it.attributesMap["event_type"]).isEqualTo("OFFER_PROMOTED")
 
             val actual = assertDoesNotThrow { it.data.deserializeJsonAs<ExternalOfferPromoted>() }

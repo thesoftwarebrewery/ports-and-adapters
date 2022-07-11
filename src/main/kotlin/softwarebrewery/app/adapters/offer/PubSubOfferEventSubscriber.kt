@@ -3,7 +3,7 @@ package softwarebrewery.app.adapters.offer
 import softwarebrewery.app.adapters.offer.MessageAttributes.Companion.EVENT_TYPE
 import softwarebrewery.app.adapters.offer.MessageAttributes.Companion.EVENT_TYPE_OFFER_CREATED
 import softwarebrewery.app.domain.*
-import softwarebrewery.app.infra.pubsub.*
+import softwarebrewery.infra.pubsub.*
 import java.nio.*
 
 @DrivingAdapter
