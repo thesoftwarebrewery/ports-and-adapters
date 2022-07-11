@@ -4,6 +4,7 @@ import com.tngtech.archunit.core.importer.*
 import com.tngtech.archunit.junit.*
 import com.tngtech.archunit.lang.*
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.*
+import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.*
 
 @AnalyzeClasses(
     packagesOf = [ApplicationArchitectureTest::class],
@@ -14,9 +15,9 @@ class ApplicationArchitectureTest {
     @ArchTest
     val `domain layer is independent of other layers`: ArchRule =
         classes()
-            .that().resideInAPackage("..domain..")
+            .that().resideInAPackage("..app.domain..")
             .should().onlyDependOnClassesThat().resideInAnyPackage(
-                "..domain..",
+                "..app.domain..",
                 "java..",
                 "kotlin..",
                 "org.jetbrains.annotations",
@@ -28,11 +29,18 @@ class ApplicationArchitectureTest {
     @ArchTest
     val `domain layer ports only depend on domain model`: ArchRule =
         noClasses()
-            .that().resideInAPackage("..domain.ports..")
+            .that().resideInAPackage("..app.domain.ports..")
             .should().accessClassesThat().resideOutsideOfPackages(
                 "java..",
                 "kotlin..",
-                "..domain..",
+                "..app.domain..",
             )
             .because("domain layer ports must express themselves in term of the domain")
+
+    @ArchTest
+    val `adapters are independent from other adapters`: ArchRule =
+        slices()
+            .matching("..app.adapters.(*)")
+            .should().notDependOnEachOther()
+
 }
