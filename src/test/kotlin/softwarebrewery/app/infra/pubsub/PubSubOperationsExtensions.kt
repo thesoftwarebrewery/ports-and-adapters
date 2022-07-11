@@ -10,10 +10,11 @@ import java.util.concurrent.TimeUnit.*
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
-// wait to observe publication success or failure forcing tests to fail fast in case e.g. a topic is not found
 fun PubSubOperations.publishSync(topic: String, message: PubsubMessage, timeout: Duration = 3.seconds) {
-    publish(topic, message).get(timeout.inWholeMilliseconds, MILLISECONDS)
-    // todo: allow message handling to commit before next message to prevent missed links in concurrent tx
+    // wait to observe publication success or propagate failure when it occurs
+    // this ensures tests fail fast in case for example a topic is not found
+    publish(topic, message)
+        .get(timeout.inWholeMilliseconds, MILLISECONDS)
 }
 
 fun PubSubOperations.assertReceived(
@@ -32,10 +33,7 @@ fun PubSubOperations.assertReceived(
 fun aPubSubMessage(
     attributes: Map<String, String> = emptyMap(),
     data: String,
-) = aPubSubMessage(
-    attributes = attributes,
-    data = ByteString.copyFromUtf8(data),
-)
+) = aPubSubMessage(attributes, ByteString.copyFromUtf8(data))
 
 fun aPubSubMessage(
     attributes: Map<String, String> = emptyMap(),
