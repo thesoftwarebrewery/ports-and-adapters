@@ -43,4 +43,15 @@ class ApplicationArchitectureTest {
             .matching("..app.adapters.(*)")
             .should().notDependOnEachOther()
 
+    @ArchTest
+    val `infra is independent from application specific code`: ArchRule =
+        noClasses()
+            .that().resideInAPackage("..app.infra..")
+            .should().accessClassesThat().resideInAnyPackage(
+                "..app.adapters..",
+                "..app.domain..",
+                "..app",
+            )
+            .because("decoupling infra from application specifics makes them portable/reusable cross applications")
+
 }
