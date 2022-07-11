@@ -1,4 +1,4 @@
-package softwarebrewery.app
+package softwarebrewery.app.infra
 
 import kotlin.random.*
 

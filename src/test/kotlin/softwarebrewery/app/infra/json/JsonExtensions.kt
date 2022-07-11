@@ -1,4 +1,4 @@
-package softwarebrewery.app.infra
+package softwarebrewery.app.infra.json
 
 import com.fasterxml.jackson.databind.*
 import com.fasterxml.jackson.datatype.jsr310.*

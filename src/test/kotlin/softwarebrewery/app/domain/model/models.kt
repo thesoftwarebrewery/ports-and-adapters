@@ -1,7 +1,7 @@
 package softwarebrewery.app.domain.model
 
-import softwarebrewery.app.*
 import softwarebrewery.app.domain.*
+import softwarebrewery.app.infra.*
 import java.time.*
 import java.time.Instant.*
 

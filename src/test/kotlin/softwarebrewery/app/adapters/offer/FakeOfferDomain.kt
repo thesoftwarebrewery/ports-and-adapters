@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.stereotype.*
-import softwarebrewery.app.infra.*
+import softwarebrewery.app.infra.json.*
 import softwarebrewery.app.infra.pubsub.*
 import java.time.Instant.*
 
