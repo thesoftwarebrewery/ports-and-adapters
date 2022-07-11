@@ -4,6 +4,7 @@ import com.tngtech.archunit.core.importer.*
 import com.tngtech.archunit.junit.*
 import com.tngtech.archunit.lang.*
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.*
+import com.tngtech.archunit.library.Architectures.*
 import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.*
 
 @AnalyzeClasses(
@@ -31,9 +32,9 @@ class ApplicationArchitectureTest {
         noClasses()
             .that().resideInAPackage("..app.domain.ports..")
             .should().accessClassesThat().resideOutsideOfPackages(
+                "..app.domain..",
                 "java..",
                 "kotlin..",
-                "..app.domain..",
             )
             .because("domain layer ports must express themselves in term of the domain")
 
@@ -52,4 +53,17 @@ class ApplicationArchitectureTest {
             )
             .because("decoupling infra from application specifics makes them portable/reusable cross applications")
 
+    @ArchTest
+    val `layer dependencies`: ArchRule =
+        layeredArchitecture()
+            .layer("infra").definedBy(
+                "java..", "kotlin..", "kotlinx..", "com..", "org..", "mu..", /* our */ "..infra.."
+            )
+            .layer("domain").definedBy("..app.domain..")
+            .layer("adapters").definedBy("..app.adapters..")
+            .layer("composition").definedBy("..app")
+            .whereLayer("infra").mayOnlyBeAccessedByLayers("adapters", "composition")
+            .whereLayer("adapters").mayOnlyAccessLayers("infra", "domain")
+            .whereLayer("adapters").mayOnlyBeAccessedByLayers("composition")
+            .whereLayer("domain").mayOnlyBeAccessedByLayers("adapters", "composition")
 }

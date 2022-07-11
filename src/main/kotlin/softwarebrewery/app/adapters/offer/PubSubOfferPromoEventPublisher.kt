@@ -24,7 +24,7 @@ class PubSubOfferPromoEventPublisher(
             offerId = event.offerId,
         )
         val message = Message(
-            id = randomId(),
+            id = randomUuid(),
             topic = topic,
             attributes = mapOf(EVENT_TYPE to EVENT_TYPE_OFFER_PROMOTED),
             data = ByteBuffer.wrap(externalOfferPromoted.toJson().toByteArray()),
