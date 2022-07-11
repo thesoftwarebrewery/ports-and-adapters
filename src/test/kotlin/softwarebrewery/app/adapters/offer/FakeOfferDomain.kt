@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.*
 import org.springframework.stereotype.*
 import softwarebrewery.app.infra.*
 import softwarebrewery.app.infra.pubsub.*
-import java.time.*
+import java.time.Instant.*
 
 @Component
 class FakeOfferDomain(
@@ -16,7 +16,7 @@ class FakeOfferDomain(
     private val pubSub: PubSubOperations,
 ) {
 
-    fun publishCreated(message: ExternalOfferCreated) {
+    fun publish(message: ExternalOfferCreated) {
         val pubSubMessage = aPubSubMessage(
             attributes = mapOf("event_type" to "OFFER_CREATED"),
             data = message.toJson(),
@@ -33,6 +33,7 @@ class FakeOfferDomain(
             assertThat(actual.offerId).isEqualTo(message.offerId)
             assertThat(actual.country).isEqualTo(message.country)
             assertThat(actual.promotionId).isEqualTo(message.promotionId)
-            assertThat(actual.publishedAt).isBetween(Instant.now().minusSeconds(5), Instant.now())
+            // for now a shade of 'recentness' will suffice
+            assertThat(actual.publishedAt).isBetween(now().minusSeconds(5), now())
         }
 }

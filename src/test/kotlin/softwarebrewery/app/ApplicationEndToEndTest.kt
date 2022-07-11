@@ -21,18 +21,21 @@ class ApplicationEndToEndTest(
 ) {
 
     @Test
-    fun `given existing offer when matching promo is activated then notifies offer promoted`() {
-        val offer = anExternalOfferCreated()
-        val promotion = anExternalPromotionMessage(productId = offer.productId!!, country = offer.country!!)
+    fun `when matching offer and promo are created then announces offer-promoted`() {
+        val offerCreated = anExternalOfferCreated()
+        val promotionCreated = anExternalPromotionMessage(
+            productId = offerCreated.productId!!,
+            country = offerCreated.country!!,
+        )
         val offerPromoted = ExternalOfferPromoted(
             publishedAt = now(),
-            offerId = offer.offerId!!,
-            promotionId = promotion.promotionId!!,
-            country = promotion.country!!,
+            offerId = offerCreated.offerId!!,
+            promotionId = promotionCreated.promotionId!!,
+            country = promotionCreated.country!!,
         )
-        offerDomain.publishCreated(offer)
 
-        promoDomain.publishCreated(promotion)
+        offerDomain.publish(offerCreated)
+        promoDomain.publish(promotionCreated)
 
         offerDomain.hasReceived(offerPromoted)
     }
