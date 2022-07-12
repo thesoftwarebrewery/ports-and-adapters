@@ -7,6 +7,9 @@ It's job is to mediate between two `business domains`:
 1) the `offers` `business domain`, to which this `application service` belongs
 2) the `promos` `business domain`, to which this `application service` listens
 
+# Context
+![context diagram](/docs/offer-promo-diagram.drawio.png)
+
 # Terminology
 | term | definition|
 | --  | -- |
