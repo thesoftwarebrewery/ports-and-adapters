@@ -1,5 +1,6 @@
-package softwarebrewery.app.adapters.application
+package softwarebrewery.app
 
+import softwarebrewery.app.adapters.application.*
 import softwarebrewery.app.domain.ports.*
 import org.springframework.context.annotation.*
 import org.springframework.jdbc.core.namedparam.*

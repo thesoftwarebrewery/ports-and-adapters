@@ -1,5 +1,6 @@
-package softwarebrewery.app.adapters.offer
+package softwarebrewery.app
 
+import softwarebrewery.app.adapters.offer.*
 import softwarebrewery.app.domain.*
 import softwarebrewery.app.domain.ports.*
 import softwarebrewery.infra.pubsub.*
