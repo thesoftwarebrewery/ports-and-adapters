@@ -1,16 +1,28 @@
 # What
 A demo application service that illustrates `an approach` one could take in implementing ports and adapters.
 
+# Development
+Start application service dependencies (pubsub, postgres) as configured by `docker-compose`.
+```shell
+make environment-up
+```
+
+Build and run test suite
+```shell
+make test
+```
+
+
 # Idea
 This hypothetical software `application service` is a deployable software component.
 It's job is to mediate between two `business domains`:
 1) the `offers` `business domain`, to which this `application service` belongs
 2) the `promos` `business domain`, to which this `application service` listens
 
-# Context
+## Context
 ![context diagram](/docs/offer-promo-diagram.drawio.png)
 
-# Terminology
+## Terminology
 | term | definition|
 | --  | -- |
 | application service | a deployable software component |
