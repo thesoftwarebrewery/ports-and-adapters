@@ -1,7 +1,7 @@
 package softwarebrewery.app.domain
 
-import org.junit.jupiter.api.*
 import softwarebrewery.app.domain.model.*
+import org.junit.jupiter.api.*
 
 class DomainFunctionalTest {
 

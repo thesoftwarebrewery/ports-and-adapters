@@ -12,6 +12,6 @@ data class VersionedOffer(
     override fun clone(
         offerId: OfferId,
         productId: ProductId,
-        country: Country
+        country: Country,
     ): Offer = copy(offerId = offerId, productId = productId, country = country)
 }

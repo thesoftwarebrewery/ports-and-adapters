@@ -1,7 +1,7 @@
 package softwarebrewery.app.adapters.application
 
-import org.springframework.transaction.annotation.*
 import softwarebrewery.app.domain.*
+import org.springframework.transaction.annotation.*
 
 @Transactional
 class TransactionalDomainApi(domainApi: DomainApi) : DomainApi by domainApi

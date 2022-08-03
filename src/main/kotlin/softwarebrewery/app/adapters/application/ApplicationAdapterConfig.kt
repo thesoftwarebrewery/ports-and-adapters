@@ -1,9 +1,8 @@
-package softwarebrewery.app
+package softwarebrewery.app.adapters.application
 
+import softwarebrewery.app.domain.ports.*
 import org.springframework.context.annotation.*
 import org.springframework.jdbc.core.namedparam.*
-import softwarebrewery.app.adapters.application.*
-import softwarebrewery.app.domain.ports.*
 import java.time.*
 
 @Configuration

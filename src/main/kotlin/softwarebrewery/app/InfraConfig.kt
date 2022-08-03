@@ -1,12 +1,12 @@
 package softwarebrewery.app
 
+import softwarebrewery.infra.pubsub.*
 import com.google.api.gax.core.*
 import com.google.cloud.spring.pubsub.core.*
 import org.springframework.context.*
 import org.springframework.context.annotation.*
 import org.springframework.jdbc.core.namedparam.*
 import org.springframework.transaction.*
-import softwarebrewery.infra.pubsub.*
 import java.time.*
 import java.time.Instant.*
 import kotlin.time.Duration.Companion.seconds

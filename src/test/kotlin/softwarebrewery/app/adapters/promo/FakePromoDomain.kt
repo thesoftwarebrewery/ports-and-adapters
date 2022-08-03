@@ -1,9 +1,9 @@
 package softwarebrewery.app.adapters.promo
 
+import softwarebrewery.infra.pubsub.*
 import com.google.cloud.spring.pubsub.core.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.stereotype.*
-import softwarebrewery.infra.pubsub.*
 
 @Component
 class FakePromoDomain(

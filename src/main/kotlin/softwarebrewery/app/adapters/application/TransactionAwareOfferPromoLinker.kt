@@ -1,14 +1,14 @@
 package softwarebrewery.app.adapters.application
 
+import softwarebrewery.app.adapters.application.LinkTrigger.*
+import softwarebrewery.app.domain.*
+import softwarebrewery.app.domain.model.*
+import softwarebrewery.app.domain.ports.*
 import org.springframework.context.*
 import org.springframework.transaction.annotation.*
 import org.springframework.transaction.annotation.Propagation.*
 import org.springframework.transaction.event.*
 import org.springframework.transaction.event.TransactionPhase.*
-import softwarebrewery.app.adapters.application.LinkTrigger.*
-import softwarebrewery.app.domain.*
-import softwarebrewery.app.domain.model.*
-import softwarebrewery.app.domain.ports.*
 
 @DrivenAdapter  // activated by domain logic to fulfill OfferPromoLinker role
 @DrivingAdapter // activates domain logic of OfferPromoLinker

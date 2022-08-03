@@ -1,5 +1,7 @@
 package softwarebrewery.app.adapters.application
 
+import softwarebrewery.app.domain.ports.*
+import softwarebrewery.infra.*
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.*
@@ -9,8 +11,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.jdbc.core.*
 import org.springframework.jdbc.core.namedparam.*
 import org.springframework.test.context.*
-import softwarebrewery.app.domain.ports.*
-import softwarebrewery.infra.*
 import java.sql.*
 import kotlin.time.Duration.Companion.seconds
 

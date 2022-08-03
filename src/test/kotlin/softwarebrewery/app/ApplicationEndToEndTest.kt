@@ -1,14 +1,14 @@
 package softwarebrewery.app
 
+import softwarebrewery.app.adapters.offer.*
+import softwarebrewery.app.adapters.promo.*
+import softwarebrewery.infra.jdbc.*
 import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.boot.test.context.*
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.*
 import org.springframework.context.annotation.*
 import org.springframework.test.context.*
-import softwarebrewery.app.adapters.offer.*
-import softwarebrewery.app.adapters.promo.*
-import softwarebrewery.infra.jdbc.*
 import java.time.Instant.*
 
 @ResetDatabase

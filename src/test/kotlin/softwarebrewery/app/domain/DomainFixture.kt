@@ -1,9 +1,9 @@
 package softwarebrewery.app.domain
 
-import org.assertj.core.api.Assertions.*
 import softwarebrewery.app.adapters.application.*
 import softwarebrewery.app.domain.model.*
 import softwarebrewery.app.domain.ports.*
+import org.assertj.core.api.Assertions.*
 import java.time.*
 import kotlin.time.Duration.Companion.seconds
 

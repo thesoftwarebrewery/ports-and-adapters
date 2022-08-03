@@ -1,10 +1,10 @@
 package softwarebrewery.app.adapters.application
 
+import softwarebrewery.app.domain.model.*
+import softwarebrewery.app.domain.ports.*
 import org.springframework.dao.*
 import org.springframework.jdbc.core.*
 import org.springframework.jdbc.core.namedparam.*
-import softwarebrewery.app.domain.model.*
-import softwarebrewery.app.domain.ports.*
 import java.sql.*
 import java.time.*
 

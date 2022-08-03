@@ -1,10 +1,9 @@
-package softwarebrewery.app
+package softwarebrewery.app.adapters.promo
 
-import org.springframework.beans.factory.annotation.*
-import org.springframework.context.annotation.*
-import softwarebrewery.app.adapters.promo.*
 import softwarebrewery.app.domain.*
 import softwarebrewery.infra.pubsub.*
+import org.springframework.beans.factory.annotation.*
+import org.springframework.context.annotation.*
 
 @Configuration
 class PromoAdapterConfig {

@@ -1,20 +1,18 @@
 package softwarebrewery.infra.pubsub
 
-import com.google.api.core.*
+import softwarebrewery.infra.pubsub.PubSubSubscriber.*
 import com.google.cloud.pubsub.v1.*
 import com.google.cloud.spring.pubsub.core.subscriber.*
 import com.google.cloud.spring.pubsub.support.*
-import com.google.common.util.concurrent.*
 import mu.*
 import org.springframework.context.*
-import softwarebrewery.infra.pubsub.PubSubSubscriber.*
 import java.nio.*
 import java.util.concurrent.TimeUnit.*
 
 typealias Subscription = String
 
 fun interface NewPubSubSubscriber {
-    operator fun invoke(subscription: Subscription, handler: MessageHandler) : PubSubSubscriber
+    operator fun invoke(subscription: Subscription, handler: MessageHandler): PubSubSubscriber
 }
 
 interface MessageHandler {

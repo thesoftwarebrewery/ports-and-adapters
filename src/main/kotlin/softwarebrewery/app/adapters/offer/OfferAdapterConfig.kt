@@ -1,11 +1,10 @@
-package softwarebrewery.app
+package softwarebrewery.app.adapters.offer
 
-import org.springframework.beans.factory.annotation.*
-import org.springframework.context.annotation.*
-import softwarebrewery.app.adapters.offer.*
 import softwarebrewery.app.domain.*
 import softwarebrewery.app.domain.ports.*
 import softwarebrewery.infra.pubsub.*
+import org.springframework.beans.factory.annotation.*
+import org.springframework.context.annotation.*
 
 @Configuration
 class OfferAdapterConfig {

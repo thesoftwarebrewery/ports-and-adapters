@@ -1,6 +1,5 @@
 package softwarebrewery.app.adapters.offer
 
-import org.springframework.beans.factory.annotation.*
 import softwarebrewery.app.adapters.offer.MessageAttributes.Companion.EVENT_TYPE
 import softwarebrewery.app.adapters.offer.MessageAttributes.Companion.EVENT_TYPE_OFFER_PROMOTED
 import softwarebrewery.app.domain.*
@@ -8,6 +7,7 @@ import softwarebrewery.app.domain.model.*
 import softwarebrewery.app.domain.ports.*
 import softwarebrewery.infra.*
 import softwarebrewery.infra.pubsub.*
+import org.springframework.beans.factory.annotation.*
 import java.nio.*
 
 @DrivenAdapter

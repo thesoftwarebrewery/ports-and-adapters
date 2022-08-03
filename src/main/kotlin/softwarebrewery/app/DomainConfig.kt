@@ -1,13 +1,13 @@
 package softwarebrewery.app
 
-import org.springframework.context.*
-import org.springframework.context.annotation.*
-import org.springframework.jdbc.core.namedparam.*
 import softwarebrewery.app.adapters.application.*
 import softwarebrewery.app.domain.*
 import softwarebrewery.app.domain.model.*
 import softwarebrewery.app.domain.ports.*
 import softwarebrewery.app.domain.ports.Clock
+import org.springframework.context.*
+import org.springframework.context.annotation.*
+import org.springframework.jdbc.core.namedparam.*
 import java.time.*
 
 @Configuration
