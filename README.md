@@ -1,5 +1,5 @@
 # What
-A demo application service that illustrates `an approach` one could take in implementing ports and adapters.
+A demo application service that illustrates `an approach` one could take in implementing [ports and adapters](https://alistair.cockburn.us/hexagonal-architecture/).
 
 ![ports and adapters](/docs/ports-and-adapters.drawio.png)
 
