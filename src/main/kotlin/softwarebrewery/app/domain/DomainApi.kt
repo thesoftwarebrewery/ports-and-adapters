@@ -3,7 +3,7 @@ package softwarebrewery.app.domain
 import softwarebrewery.app.domain.model.*
 import java.time.*
 
-@PrimaryPort
+@InboundPort
 interface DomainApi {
     fun handle(event: OfferCreated)
     fun handle(event: OfferDeleted)

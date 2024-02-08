@@ -3,7 +3,7 @@ package softwarebrewery.app.domain.ports
 import softwarebrewery.app.domain.*
 import softwarebrewery.app.domain.model.*
 
-@SecondaryPort
+@OutboundPort
 interface PromoRepo {
 
     fun new(promotionId: PromotionId, productId: ProductId, country: Country): Promo

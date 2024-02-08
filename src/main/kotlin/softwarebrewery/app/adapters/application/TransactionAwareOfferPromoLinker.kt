@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Propagation.*
 import org.springframework.transaction.event.*
 import org.springframework.transaction.event.TransactionPhase.*
 
-@DrivenAdapter  // activated by domain logic to fulfill OfferPromoLinker role
-@DrivingAdapter // activates domain logic of OfferPromoLinker
+@OutboundAdapter  // activated by domain logic to fulfill OfferPromoLinker role
+@InboundAdapter // activates domain logic of OfferPromoLinker
 @Transactional
 class TransactionAwareOfferPromoLinker(
     private val linkRequestRepo: JdbcLinkRequestRepo,

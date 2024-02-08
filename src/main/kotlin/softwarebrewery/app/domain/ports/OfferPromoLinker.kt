@@ -3,7 +3,7 @@ package softwarebrewery.app.domain.ports
 import softwarebrewery.app.domain.*
 import softwarebrewery.app.domain.model.*
 
-@SecondaryPort
+@OutboundPort
 interface OfferPromoLinker {
     fun linkPromosToOffer(offer: Offer)
     fun linkOffersToPromo(promo: Promo)

@@ -4,7 +4,7 @@ import softwarebrewery.app.domain.*
 import softwarebrewery.app.domain.model.*
 import softwarebrewery.app.domain.ports.*
 
-@DrivenAdapter
+@OutboundAdapter
 class InMemOfferPromoAnnouncer : OfferPromoAnnouncer {
 
     private val promoted = mutableListOf<OfferPromoted>()

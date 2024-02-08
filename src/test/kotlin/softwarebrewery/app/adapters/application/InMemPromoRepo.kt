@@ -6,7 +6,7 @@ import softwarebrewery.app.domain.ports.*
 import java.time.*
 import java.util.concurrent.*
 
-@DrivenAdapter
+@OutboundAdapter
 class InMemPromoRepo(
     private val clock: () -> Instant,
 ) : PromoRepo {

@@ -6,22 +6,22 @@ import kotlin.annotation.AnnotationTarget.*
 @Target(ANNOTATION_CLASS, CLASS)
 @Retention(RUNTIME)
 @MustBeDocumented
-annotation class DrivingAdapter
+annotation class InboundAdapter
 
 @Target(ANNOTATION_CLASS, CLASS)
 @Retention(RUNTIME)
 @MustBeDocumented
-annotation class DrivenAdapter
+annotation class OutboundAdapter
 
 @Target(ANNOTATION_CLASS, CLASS)
 @Retention(RUNTIME)
 @MustBeDocumented
-annotation class PrimaryPort
+annotation class InboundPort
 
 @Target(ANNOTATION_CLASS, CLASS)
 @Retention(RUNTIME)
 @MustBeDocumented
-annotation class SecondaryPort
+annotation class OutboundPort
 
 @Target(ANNOTATION_CLASS, CLASS)
 @Retention(RUNTIME)

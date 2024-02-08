@@ -10,7 +10,7 @@ import softwarebrewery.infra.pubsub.*
 import org.springframework.beans.factory.annotation.*
 import java.nio.*
 
-@DrivenAdapter
+@OutboundAdapter
 class PubSubOfferPromoEventPublisher(
     @Value("\${pubsub.offer.offer-promo-events.topic}") private val topic: String,
     private val pubSubOutbox: PubSubOutbox,

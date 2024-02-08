@@ -6,7 +6,7 @@ import softwarebrewery.app.domain.*
 import softwarebrewery.infra.pubsub.*
 import java.nio.*
 
-@DrivingAdapter
+@InboundAdapter
 class PubSubOfferEventSubscriber(
     private val domainApi: DomainApi,
 ) : MessageHandler {
